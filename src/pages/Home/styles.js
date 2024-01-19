@@ -121,8 +121,11 @@ export const HomeContainer = styled.section`
 export const FormContainer = styled.section`
   padding-top: 96px;
 
-  ${respondTo('large')`
+  /* ${respondTo('large')`
     padding-top: 120px;
+  `} */
+  ${respondTo('large')`
+    padding-top: 124px;
   `}
 `;
 
@@ -131,8 +134,11 @@ export const ServicesContainer = styled.section`
 
   padding: 80px 0 64px;
 
-  ${respondTo('large')`
+  /* ${respondTo('large')`
     padding: 120px 0 120px;
+  `} */
+  ${respondTo('large')`
+    padding: 220px 0 240px;
   `}
 
   h2 {
@@ -238,8 +244,12 @@ export const FreeContainer = styled.section`
 
   padding-bottom: 96px;
 
-  ${respondTo('large')`
+  /* ${respondTo('large')`
     padding-bottom: 120px;
+  `} */
+
+  ${respondTo('large')`
+    padding-bottom: 260px;
   `}
 
   p {
@@ -251,6 +261,10 @@ export const TestimonialsContainer = styled.section`
   background-color: ${({ theme }) => theme.colors.primary.main};
 
   padding: 96px 0 96px;
+
+  ${respondTo('large')`
+    padding: 180px 0 200px;
+  `}
   
   h2 {
     color: ${({ theme }) => theme.colors.primary.light};
