@@ -1,8 +1,8 @@
 import { Container } from './styles';
 
-export default function FormGroup({icon, label, children}) {
+export default function FormGroup({icon, label, error, children}) {
   return (
-    <Container>
+    <Container $error={error}>
       <div id='labelContainer'>
       {
           icon === 'email' && (
@@ -104,7 +104,10 @@ export default function FormGroup({icon, label, children}) {
           )
         }
 
-        <label>{label}</label>
+        {/* <label>{label}</label> */}
+        <label>
+          { error ? error : label }
+        </label>
       </div>
       {children}
     </Container>

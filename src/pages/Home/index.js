@@ -1,3 +1,6 @@
+
+import { useState } from 'react';
+
 import { 
   Container, Header, HomeContainer, FormContainer, ServicesContainer,  FreeContainer, TestimonialsContainer
 } from './styles';
@@ -24,7 +27,18 @@ import testimonials1 from '../../assets/images/testimonials-1.svg';
 import testimonials2 from '../../assets/images/testimonials-2.svg';
 import testimonials3 from '../../assets/images/testimonials-3.svg';
 
+
 export default function Footer() {
+  const [serviceSelected, setServiceSelected] = useState('');
+
+  function scrollToForm() {
+    const form = document.getElementById('form');
+
+    form.scrollIntoView({
+      behavior: 'smooth',
+    });
+  }
+  
   return (
     <Container>
       <Header>
@@ -45,7 +59,7 @@ export default function Footer() {
               <p>Since 2010, we have been working with the goal of providing high-quality cleaning and handyman services, tailored to meet the unique needs of each client.</p>
             </Reveal>
             <Reveal delay='0.3'>
-              <Button>Get in contact</Button>
+              <Button onClick={scrollToForm}>Get in contact</Button>
             </Reveal>
           </div>
           <div className='home__img' delay='0.4'>
@@ -56,10 +70,11 @@ export default function Footer() {
         </Section>
       </HomeContainer>
 
+      <div id='form'></div>
       <FormContainer>
         <Section>
           <div id='contact'></div>
-          <Form />
+          <Form serviceSelected={serviceSelected} />
         </Section>
       </FormContainer>
 
@@ -74,42 +89,60 @@ export default function Footer() {
               <img src={deepClean} />
               <h4>Deep Clean</h4>
               <p>Every nook and cranny meticulously cleaned, from baseboards to ceiling fans, and every surface in between. they'll all be restored to their sparkling best with our deep clean! Our skilled and detail-oriented cleaning professionals have the experience to tackle deep cleaning tasks effectively!</p>
-              <Button>Get in contact</Button>
+              <Button onClick={() => {
+                setServiceSelected('Deep Clean');
+                scrollToForm();
+              }}>Get in contact</Button>
             </div>
 
             <div>
               <img src={standardClean} />
               <h4>Standard Clean</h4>
               <p>Say goodbye to the stress of regular cleaning! Our team of experts is ready to keep your home shining week after week. Our standard cleaning services are designed to keep your living spaces fresh and inviting, allowing you to focus on what matters most!</p>
-              <Button>Get in contact</Button>
+              <Button onClick={() => {
+                setServiceSelected('Standard Clean');
+                scrollToForm();
+              }}>Get in contact</Button>
             </div>
 
             <div>
               <img src={handyman} />
               <h4>Handyman</h4>
               <p>Tackling home repairs or improvements? Look no further! Our team of skilled handymen is here to provide reliable and high-quality services to meet all your home maintenance needs. You can trust us to handle your projects with precision and care.</p>
-              <Button>Get in contact</Button>
+              <Button onClick={() => {
+                setServiceSelected('Handyman');
+                scrollToForm();
+              }}>Get in contact</Button>
             </div>
 
             <div>
               <img src={carpetClean} />
               <h4>Carpet cleaning</h4>
               <p>We go beyond the surface to eliminate embedded dirt, and allergens, leaving your carpets looking and feeling like new.  Our cleaning process is tailored to the specific needs of your carpet, ensuring a customized and effective cleaning experience.</p>
-              <Button>Get in contact</Button>
+              <Button onClick={() => {
+                setServiceSelected('Carpet Cleaning');
+                scrollToForm();
+              }}>Get in contact</Button>
             </div>
 
             <div>
               <img src={moveInMoveOut} />
               <h4>Move in/Move out</h4>
               <p>Our services are the key to a seamless transition. We inspect for any damages and assist in preparing your home for new occupants or ensuring that you leave it in the best possible condition. e have the expertise to handle all aspects of the cleaning process.</p>
-              <Button>Get in contact</Button>
+              <Button onClick={() => {
+                setServiceSelected('Move In/Out');
+                scrollToForm();
+              }}>Get in contact</Button>
             </div>
 
             <div>
               <img src={vocationRental} />
               <h4>Vocation Rental</h4>
               <p>Prepare your property for the next set of guests with our efficient turnover cleaning services. We leave no corner untouched. Our attention to detail sets us apart, ensuring that every nook and cranny is thoroughly cleaned and ready for your next guests. </p>
-              <Button>Get in contact</Button>
+              <Button onClick={() => {
+                setServiceSelected('Vocation Rental');
+                scrollToForm();
+              }}>Get in contact</Button>
             </div>
           </section>
         </Reveal>
@@ -129,7 +162,7 @@ export default function Footer() {
               <p>We understand that modern life is hectic. That's why we offer exceptional cleaning services to help you reclaim your precious time. Just imagine the possibilities when you no longer have to worry about cleaning your home. Instead, you can focus on the things that truly matter.</p>
             </Reveal>
             <Reveal>
-              <Button>Get in contact</Button>
+              <Button onClick={scrollToForm}>Get in contact</Button>
             </Reveal>
           </div>
         </Section>

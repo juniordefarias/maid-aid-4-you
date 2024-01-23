@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 import { Container, ButtonForm, RowContainer } from './styles';
 
@@ -8,7 +8,24 @@ import CheckboxContainer from '../CheckboxContainer';
 
 import Reveal from '../Reveal';
 
-export default function Form() {
+import useErrors from '../../hooks/useErrors';
+
+import formatPhoneNumber from '../../utils/formatPhoneNumber';
+import formatZipCode from '../../utils/formatZipCode';
+
+import isEmailValid from '../../utils/isEmailValid';
+import isPhoneNumberValid from '../../utils/isPhoneNumberValid';
+import isZipCodeValid from '../../utils/isZipCodeValid';
+
+export default function Form({ serviceSelected }) {
+  const {
+    /* Vamos pegar o state errors para usá-lo para fazer a validação do form  */
+    errors,
+    setError,
+    removeError,
+    getErrorMessageByFieldName
+  } = useErrors();
+
   const properties = ['Residencial', 'Commercial']
   const [typeProperty, setTypeProperty] = useState('Residencial');
   const handleTypePropertyChange = (event) => {
@@ -27,6 +44,12 @@ export default function Form() {
   const handleResidencialServiceChange = (event) => {
     setResidencialService(event.target.value);
   };
+
+  useEffect(() => {
+    if (serviceSelected) {
+      setResidencialService(serviceSelected);
+    }
+  }, [serviceSelected]);
 
   const intervals = [
     'Only once',
@@ -107,18 +130,90 @@ export default function Form() {
     setStandardAdditionalService(stateUpdate);
   };
 
+  const deepAdditionalServices = [
+    {name: 'Fridge cleaning', value: 30},
+    {name: 'Oven cleaning', value: 20},
+    {name: 'Organize pantry itens', value: 20},
+    {name: 'Organize cabinets', value: 50},
+    {name: 'Vaccum and swiffer in the garage', value: 20},
+  ];
+  const [deepAdditionalService, setDeepAdditionalService] = useState(
+    deepAdditionalServices.map((option, index) => (
+      { 
+        id: index, 
+        name: option.name,
+        value: option.value, 
+        checked: false 
+      }
+    ))
+  );
+  function handleDeepAdditionalServiceChange(event) {
+    const { id, name, checked } = event.target;
+
+    const stateUpdate = deepAdditionalService.map((checkbox) => (
+      checkbox.id === Number(id)
+       ? {...checkbox, checked: !checkbox.checked}
+       : checkbox
+    ));
+
+    setDeepAdditionalService(stateUpdate);
+  };
+
   const [formContact, setFormContact] = useState({
     email: '',
     phone: '',
     zipCode: '',
   });
   const handleFormContactChange = (event) => {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
+
+    /* if (name === 'email' && value && !isEmailValid(value)) {
+      setError({field: 'email', message: 'E-mail inválido'})
+    } else {
+      removeError('email')
+    } */
+
+
+    if (name === 'email' && value) {
+      !isEmailValid(value) 
+        ? setError({field: 'email', message: 'E-mail invalid'})
+        : removeError('email')
+    }
+
+    if (name === 'phone' && value) {
+      value = formatPhoneNumber(value);
+
+      !isPhoneNumberValid(value) 
+        ? setError({field: 'phone', message: 'Phone invalid'})
+        : removeError('phone')
+    }
+
+    if (name === 'zipCode' && value) {
+      value = formatZipCode(value);
+
+      !isZipCodeValid(value) 
+        ? setError({field: 'zipCode', message: 'Zip Code invalid'})
+        : removeError('zipCode')
+    }
+
+    
+
     setFormContact((prevFormulario) => ({
       ...prevFormulario,
       [name]: value,
     }));
   };
+
+  const handleVerifyInputOnBlur = (event) => {
+    const { name, value } = event.target;
+
+    if (name === 'email' && event.target.value) {
+      !isEmailValid(event.target.value)
+        ? setError({field: 'email', message: 'E-mail inválido'})
+        : removeError('email')
+    }
+    
+  }
 
   const [formProperty, setFormProperty] = useState({
     buildingSize: '',
@@ -130,13 +225,49 @@ export default function Form() {
     const { name, value } = event.target;
     setFormProperty((prevFormulario) => ({
       ...prevFormulario,
-      [name]: value,
+      [name]: value.replace(/\D/g, ''),
     }));
   };
 
-  const isFormValid = formContact.email !== '' && formContact.phone !== '' && formContact.zipCode !== '' ? true : false;
+  const isFormValid = formContact.email !== '' && formContact.phone !== '' && formContact.zipCode !== '' && errors.length === 0 && (residencialService === 'Handyman' || formProperty.buildingSize !== '') ? true : false;
 
-  
+  const budget = useMemo(() => {
+    if (residencialService === 'Standard Clean') {
+      const valueBase = 85;
+
+      const additionalTotal = standardAdditionalService.reduce((total, item) => {
+          if (item.checked) {
+              return total + Number(item.value);
+          }
+          return total;
+      }, 0)
+
+      const additionalPet = Number(formProperty.pets) === 0 ? 0 : 30;
+
+      const calc = (0.08 * Number(formProperty.buildingSize) + additionalTotal + additionalPet);
+
+      return calc > valueBase ? calc : valueBase
+    }
+
+    if (residencialService === 'Deep Clean') {
+      const valueBase = 170;
+
+      /* const additionalTotal = standardAdditionalServices.reduce((total, item) => {
+          if (item.check) {
+              return total + item.value;
+          }
+          return total;
+      }, 0) */
+
+      const additionalPet = Number(formProperty.pets) === 0 ? 0 : 60;
+
+      const calc = (0.16 * Number(formProperty.buildingSize) + /* additionalTotal + */ additionalPet);
+
+      return calc > valueBase ? calc : valueBase
+    }
+
+    return null;
+  }, [residencialService, standardAdditionalService, formProperty.pets, formProperty.buildingSize]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -226,7 +357,7 @@ export default function Form() {
                   <RowContainer>
                     <FormGroup label='Building size' icon='ruler'>
                       <input 
-                        type='text' 
+                        type='tel' 
                         placeholder='Size in sqft' 
                         name='buildingSize'
                         value={formProperty.buildingSize}
@@ -236,7 +367,7 @@ export default function Form() {
 
                     <FormGroup label='Rooms' icon='room'>
                       <input 
-                        type='text' 
+                        type='tel' 
                         placeholder='Quantity of rooms'
                         name='rooms'
                         value={formProperty.rooms}
@@ -248,7 +379,7 @@ export default function Form() {
                       residencialService !== 'Carpet Cleaning' && (
                         <FormGroup label='Bathrooms' icon='bathroom'>
                           <input 
-                            type='text' 
+                            type='tel' 
                             placeholder='Quantity of bathrooms'
                             name='bathrooms'
                             value={formProperty.bathrooms}
@@ -262,7 +393,7 @@ export default function Form() {
                       !['Carpet Cleaning', 'Vocation Rental', 'Handyman'].includes(residencialService) && (
                         <FormGroup label='Pets' icon='email'>
                           <input 
-                            type='text' 
+                            type='tel' 
                             placeholder='How many pets you have?'
                             name='pets'
                             value={formProperty.pets}
@@ -286,6 +417,19 @@ export default function Form() {
               <CheckboxContainer
                 options={standardAdditionalService}
                 onOptionChange={handleStandardAdditionalServiceChange}
+              />
+            </FormGroup>
+          </Reveal>
+        )
+      }
+
+{
+        (residencialService === 'Deep Clean' && typeProperty === 'Residencial') && (
+          <Reveal delay='0'>
+            <FormGroup label="Additional services" icon='tools'>
+              <CheckboxContainer
+                options={deepAdditionalService}
+                onOptionChange={handleDeepAdditionalServiceChange}
               />
             </FormGroup>
           </Reveal>
@@ -322,7 +466,10 @@ export default function Form() {
 
       <Reveal>
         <RowContainer $flex={true}>
-          <FormGroup label='Email' icon='email'>
+          <FormGroup 
+            label='Email' icon='email'
+            error={getErrorMessageByFieldName('email')}
+          >
             <input 
               type='email' 
               placeholder='What’s your email?'
@@ -332,7 +479,10 @@ export default function Form() {
             />
           </FormGroup>
 
-          <FormGroup label='Phone' icon='phone'>
+          <FormGroup 
+            label='Phone' icon='phone'
+            error={getErrorMessageByFieldName('phone')}
+          >
             <input 
               type='tel'
               placeholder='What’s your number?'
@@ -345,7 +495,10 @@ export default function Form() {
             />
           </FormGroup>
 
-          <FormGroup label='Zip code' icon='map'>
+          <FormGroup 
+            label='Zip code' icon='map'
+            error={getErrorMessageByFieldName('zipCode')}
+          >
             <input 
               type='text' 
               placeholder='What’s your Zip code?' 
@@ -383,8 +536,11 @@ export default function Form() {
         </FormGroup>
       </Reveal>
 
-      <ButtonForm onClick={handleSubmit}>
-        Schedule a date
+      <ButtonForm 
+        onClick={handleSubmit}
+        disabled={!isFormValid}
+      >
+        Schedule a date {(budget && isFormValid) && `${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`}
       </ButtonForm>
     </Container>
   )

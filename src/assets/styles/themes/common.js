@@ -10,5 +10,6 @@ export default {
     medium: 500,
     semiBold: 600,
     bold: 700,
-  }
+  },
+  danger: '#F63131',
 };

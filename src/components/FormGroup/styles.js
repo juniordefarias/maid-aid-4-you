@@ -35,6 +35,19 @@ export const Container = styled.div`
       font-size: 18px;
       font-style: normal;
       font-weight: 400;
+      ${({ $error, theme }) => (
+        $error && `color: #FC5050;`
+      )}
+
+      
+    }
+
+    svg {
+      path {
+        ${({ $error, theme }) => (
+          $error && `fill: #FC5050;`
+        )}
+      }
     }
   }
 

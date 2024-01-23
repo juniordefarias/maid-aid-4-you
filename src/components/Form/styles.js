@@ -55,6 +55,11 @@ export const ButtonForm = styled(Button)`
   padding: 16px;
 
   margin-top: 16px;
+
+  &[disabled] {
+    background: #ccc;
+    cursor: default;
+  }
 `;
 
 export const RowContainer = styled.div`
