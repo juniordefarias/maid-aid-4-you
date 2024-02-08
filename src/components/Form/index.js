@@ -421,7 +421,8 @@ export default function Form({ serviceSelected }) {
       }, (err) => {
         console.log("error:", err);
       }); */
-
+      
+    window.scrollTo(0, 0);
     setAlertOpen(true);
   }
 

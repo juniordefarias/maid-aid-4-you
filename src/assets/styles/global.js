@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-  @font-face {
+  /* @font-face {
     font-family: 'Bree';
     src: url('../../fonts/Bree ExtraBold.woff') format('woff');
     font-weight: 800;
@@ -23,17 +23,20 @@ export default createGlobalStyle`
     font-family: 'Bree';
     src: url('../../fonts/Bree Light.woff') format('woff');
     font-weight: 300;
-  }
+  } */
 
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Bree', sans-serif;
+    //font-family: 'Bree', sans-serif;
+    //font-family: 'Poppins', sans-serif;
   }
 
   body {
     scroll-behavior: smooth;
+    //font-family: 'Bree', sans-serif;
+    //font-family: 'Poppins', sans-serif;
   }
 
   img {
