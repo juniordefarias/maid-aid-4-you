@@ -8,6 +8,8 @@ import FormGroup from '../FormGroup';
 import RadioContainer from '../RadioContainer';
 import CheckboxContainer from '../CheckboxContainer';
 
+import Alert from '../Alert';
+
 import Reveal from '../Reveal';
 
 import useErrors from '../../hooks/useErrors';
@@ -40,7 +42,7 @@ export default function Form({ serviceSelected }) {
     'Handyman',
     'Move In/Out',
     'Carpet Cleaning',
-    'Vocation Rental'
+    'Vacation Rental'
   ];
   const [residencialService, setResidencialService] = useState(residencialServices[0]);
   const handleResidencialServiceChange = (event) => {
@@ -241,7 +243,7 @@ export default function Form({ serviceSelected }) {
               return total + Number(item.value);
           }
           return total;
-      }, 0)
+      }, 0);
 
       const additionalPet = Number(formProperty.pets) === 0 ? 0 : 30;
 
@@ -253,22 +255,24 @@ export default function Form({ serviceSelected }) {
     if (residencialService === 'Deep Clean') {
       const valueBase = 170;
 
-      /* const additionalTotal = standardAdditionalServices.reduce((total, item) => {
-          if (item.check) {
-              return total + item.value;
+        const additionalTotal = deepAdditionalService.reduce((total, item) => {
+          if (item.checked) {
+              return total + Number(item.value);
           }
           return total;
-      }, 0) */
+      }, 0);
+
+      console.log({additionalTotal})
 
       const additionalPet = Number(formProperty.pets) === 0 ? 0 : 60;
 
-      const calc = (0.16 * Number(formProperty.buildingSize) + /* additionalTotal + */ additionalPet);
+      const calc = (0.16 * Number(formProperty.buildingSize) + additionalTotal + additionalPet);
 
       return calc > valueBase ? calc : valueBase
     }
 
     return null;
-  }, [residencialService, standardAdditionalService, formProperty.pets, formProperty.buildingSize]);
+  }, [residencialService, standardAdditionalService, deepAdditionalServices, formProperty.pets, formProperty.buildingSize]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -385,7 +389,7 @@ export default function Form({ serviceSelected }) {
       //return;
     }
 
-    if (residencialService === 'Vocation Rental') {
+    if (residencialService === 'Vacation Rental') {
       message = (`
         email: ${formContact.email},
         phone: ${formContact.phone},
@@ -403,7 +407,7 @@ export default function Form({ serviceSelected }) {
 
     console.log(message);
 
-    const templateParams = {
+    /* const templateParams = {
       from_email: formContact.email,
       message,
       service: typeProperty === 'Commercial' ? typeProperty : residencialService,
@@ -412,9 +416,20 @@ export default function Form({ serviceSelected }) {
     emailjs.send("service_mrvfs3a", "template_ci3zktl", templateParams, "92THF5nm3464N9pdX")
       .then((response) => {
         console.log("Email enviado", response.status, response.text);
+
+        setAlertOpen(true);
       }, (err) => {
         console.log("error:", err);
-      })
+      }); */
+
+    setAlertOpen(true);
+  }
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  if (alertOpen) {
+    return (
+      <Alert onClose={() => setAlertOpen(false)} />
+    )
   }
 
   return (
@@ -487,7 +502,7 @@ export default function Form({ serviceSelected }) {
                     }
 
                     {
-                      !['Carpet Cleaning', 'Vocation Rental', 'Handyman'].includes(residencialService) && (
+                      !['Carpet Cleaning', 'Vacation Rental', 'Handyman'].includes(residencialService) && (
                         <FormGroup label='Pets' icon='email'>
                           <input 
                             type='tel' 

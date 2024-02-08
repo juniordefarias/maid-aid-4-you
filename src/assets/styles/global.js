@@ -3,25 +3,25 @@ import { createGlobalStyle } from 'styled-components';
 export default createGlobalStyle`
   @font-face {
     font-family: 'Bree';
-    src: url('../../fonts/Bree ExtraBold.ttf') format('truetype');
+    src: url('../../fonts/Bree ExtraBold.woff') format('woff');
     font-weight: 800;
     
   }
   @font-face {
     font-family: 'Bree';
-    src: url('../../fonts/Bree Bold.ttf') format('truetype');
+    src: url('../../fonts/Bree Bold.woff') format('woff');
     font-weight: 700;
   }
 
   @font-face {
     font-family: 'Bree';
-    src: url('../../fonts/Bree Regular.ttf') format('truetype');
+    src: url('../../fonts/Bree Regular.woff') format('woff');
     font-weight: 400;
   }
 
   @font-face {
     font-family: 'Bree';
-    src: url('../../fonts/Bree Light.ttf') format('truetype');
+    src: url('../../fonts/Bree Light.woff') format('woff');
     font-weight: 300;
   }
 

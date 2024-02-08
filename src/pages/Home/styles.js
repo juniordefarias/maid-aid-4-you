@@ -67,15 +67,23 @@ export const HomeContainer = styled.section`
 
   section {
     display: grid;
-    gap: 24px;
-    
+    gap: 32px;
+
     ${respondTo('medium')`
-      grid-template-columns: auto 1fr;
+      grid-template-columns: 364px 1fr;
       align-items: center;
     `}
+    /* ${respondTo('medium')`
+      display: flex;
+    `} */
 
     /* img */ .home__img {
       order: -1;
+
+      img {
+        width: 100%; 
+        height: auto;
+      }
 
       ${respondTo('medium')`
         order: 1;
@@ -91,7 +99,7 @@ export const HomeContainer = styled.section`
 
       align-self: center;
 
-      max-width: 420px;
+      //max-width: 420px;
 
       h1 {
         font-size: 60px;
@@ -100,7 +108,7 @@ export const HomeContainer = styled.section`
         line-height: 100%;
 
         ${respondTo('large')`
-          font-size: 80px;
+          font-size: 72px;
         `} 
       }
 
