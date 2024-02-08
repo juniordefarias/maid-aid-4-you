@@ -421,9 +421,9 @@ export default function Form({ serviceSelected }) {
       }, (err) => {
         console.log("error:", err);
       }); */
-      
-    window.scrollTo(0, 0);
+
     setAlertOpen(true);
+    window.scrollTo(0, 0);
   }
 
   const [alertOpen, setAlertOpen] = useState(false);
