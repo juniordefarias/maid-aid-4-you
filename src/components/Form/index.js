@@ -1,5 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 
+import emailjs from '@emailjs/browser';
+
 import { Container, ButtonForm, RowContainer } from './styles';
 
 import FormGroup from '../FormGroup';
@@ -173,7 +175,6 @@ export default function Form({ serviceSelected }) {
       removeError('email')
     } */
 
-
     if (name === 'email' && value) {
       !isEmailValid(value) 
         ? setError({field: 'email', message: 'E-mail invalid'})
@@ -272,52 +273,148 @@ export default function Form({ serviceSelected }) {
   function handleSubmit(event) {
     event.preventDefault();
 
+    let message;
+
+    function checkedServicesToString(accumulator, service) {
+      if (service.checked) {
+        if (accumulator.length > 0) {
+            accumulator += ', ';
+        }
+        accumulator += `${service.name} $${service.value}`;
+      }
+
+      return accumulator;
+    }
 
     if (typeProperty === 'Commercial') {
-      console.log({
-        typeProperty,
-        formContact,
-        moreInformations,
-        buildingSize: formProperty.buildingSize,
-      });
-      return
+      message = (`
+        email: ${formContact.email},
+        phone: ${formContact.phone},
+        zip code: ${formContact.zipCode},
+        -
+        building size: ${formProperty.buildingSize},
+        -
+        service: ${typeProperty},
+        more informations: ${moreInformations},
+      `);
+      //return;
     }
 
     if (residencialService === 'Handyman') {
-      console.log({
-        typeProperty,
-        residencialService,
-        handymanServices: checkboxValues.filter((item) => item.checked),
-        formContact,
-        moreInformations
-      });
-      return
+      message = (`
+        email: ${formContact.email},
+        phone: ${formContact.phone},
+        zip code: ${formContact.zipCode},
+        -
+        service: ${residencialService},
+        services: ${checkboxValues.filter((item) => item.checked)},
+        more informations: ${moreInformations},
+      `);
+      //return
     }
 
     if (residencialService === 'Standard Clean') {
-      console.log({
-        typeProperty,
-        residencialService,
-        standardAdditionalService: standardAdditionalService.filter((item) => item.checked),
-        formProperty,
-        interval,
-        formContact,
-        moreInformations
-      });
-      return
+      message = (`
+        email: ${formContact.email},
+        phone: ${formContact.phone},
+        zip code: ${formContact.zipCode},
+        -
+        building size: ${formProperty.buildingSize},
+        rooms: ${formProperty.rooms},
+        bathrooms: ${formProperty.bathrooms},
+        pets: ${formProperty.pets},
+        -
+        service: ${residencialService},
+        additional services: ${standardAdditionalService.reduce(checkedServicesToString, '')},
+        more informations: ${moreInformations},
+        how often: ${interval},
+        budget: ${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })},
+      `);
+      //return;
     }
 
     if (residencialService === 'Deep Clean') {
-      console.log({
-        typeProperty,
-        residencialService,
-        formProperty,
-        interval,
-        formContact,
-        moreInformations
-      });
-      return
+      message = (`
+        email: ${formContact.email},
+        phone: ${formContact.phone},
+        zip code: ${formContact.zipCode},
+        -
+        building size: ${formProperty.buildingSize},
+        rooms: ${formProperty.rooms},
+        bathrooms: ${formProperty.bathrooms},
+        pets: ${formProperty.pets},
+        -
+        service: ${residencialService},
+        additional services: ${deepAdditionalService.reduce(checkedServicesToString, '')},
+        more informations: ${moreInformations},
+        how often: ${interval},
+        budget: ${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })},
+      `);
+      //return;
     }
+
+    if (residencialService === 'Move In/Out') {
+      message = (`
+        email: ${formContact.email},
+        phone: ${formContact.phone},
+        zip code: ${formContact.zipCode},
+        -
+        building size: ${formProperty.buildingSize},
+        rooms: ${formProperty.rooms},
+        bathrooms: ${formProperty.bathrooms},
+        pets: ${formProperty.pets},
+        -
+        service: ${residencialService},
+        more informations: ${moreInformations},
+      `);
+      //return;
+    }
+
+    if (residencialService === 'Carpet Cleaning') {
+      message = (`
+        email: ${formContact.email},
+        phone: ${formContact.phone},
+        zip code: ${formContact.zipCode},
+        -
+        building size: ${formProperty.buildingSize},
+        rooms: ${formProperty.rooms},
+        -
+        service: ${residencialService},
+        more informations: ${moreInformations},
+      `);
+      //return;
+    }
+
+    if (residencialService === 'Vocation Rental') {
+      message = (`
+        email: ${formContact.email},
+        phone: ${formContact.phone},
+        zip code: ${formContact.zipCode},
+        -
+        building size: ${formProperty.buildingSize},
+        rooms: ${formProperty.rooms},
+        bathrooms: ${formProperty.bathrooms},
+        -
+        service: ${residencialService},
+        more informations: ${moreInformations},
+      `);
+      //return;
+    }
+
+    console.log(message);
+
+    const templateParams = {
+      from_email: formContact.email,
+      message,
+      service: typeProperty === 'Commercial' ? typeProperty : residencialService,
+    }
+
+    emailjs.send("service_mrvfs3a", "template_ci3zktl", templateParams, "92THF5nm3464N9pdX")
+      .then((response) => {
+        console.log("Email enviado", response.status, response.text);
+      }, (err) => {
+        console.log("error:", err);
+      })
   }
 
   return (
