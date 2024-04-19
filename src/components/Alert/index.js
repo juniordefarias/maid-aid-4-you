@@ -9,7 +9,8 @@ export default function Alert({ title, description, onClose }) {
 
   useEffect(() => {
     setTimeout(() => {
-      setShouldAnimate(true)
+      setShouldAnimate(true);
+      window.scrollTo(0, 0);
     }, 250);
   }, []);
 

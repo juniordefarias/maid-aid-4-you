@@ -30,13 +30,13 @@ export default function Form({ serviceSelected }) {
     getErrorMessageByFieldName
   } = useErrors();
 
-  const properties = ['Residencial', 'Commercial']
-  const [typeProperty, setTypeProperty] = useState('Residencial');
+  const properties = ['Residential', 'Commercial']
+  const [typeProperty, setTypeProperty] = useState('Residential');
   const handleTypePropertyChange = (event) => {
     setTypeProperty(event.target.value);
   };
 
-  const residencialServices = [
+  const residentialServices = [
     'Standard Clean',
     'Deep Clean',
     'Handyman',
@@ -44,14 +44,14 @@ export default function Form({ serviceSelected }) {
     'Carpet Cleaning',
     'Vacation Rental'
   ];
-  const [residencialService, setResidencialService] = useState(residencialServices[0]);
-  const handleResidencialServiceChange = (event) => {
-    setResidencialService(event.target.value);
+  const [residentialService, setResidentialService] = useState(residentialServices[0]);
+  const handleResidentialServiceChange = (event) => {
+    setResidentialService(event.target.value);
   };
 
   useEffect(() => {
     if (serviceSelected) {
-      setResidencialService(serviceSelected);
+      setResidentialService(serviceSelected);
     }
   }, [serviceSelected]);
 
@@ -232,10 +232,10 @@ export default function Form({ serviceSelected }) {
     }));
   };
 
-  const isFormValid = formContact.email !== '' && formContact.phone !== '' && formContact.zipCode !== '' && errors.length === 0 && (residencialService === 'Handyman' || formProperty.buildingSize !== '') ? true : false;
+  const isFormValid = formContact.email !== '' && formContact.phone !== '' && formContact.zipCode !== '' && errors.length === 0 && (residentialService === 'Handyman' || formProperty.buildingSize !== '') ? true : false;
 
   const budget = useMemo(() => {
-    if (residencialService === 'Standard Clean') {
+    if (residentialService === 'Standard Clean') {
       const valueBase = 85;
 
       const additionalTotal = standardAdditionalService.reduce((total, item) => {
@@ -252,7 +252,7 @@ export default function Form({ serviceSelected }) {
       return calc > valueBase ? calc : valueBase
     }
 
-    if (residencialService === 'Deep Clean') {
+    if (residentialService === 'Deep Clean') {
       const valueBase = 170;
 
         const additionalTotal = deepAdditionalService.reduce((total, item) => {
@@ -262,7 +262,7 @@ export default function Form({ serviceSelected }) {
           return total;
       }, 0);
 
-      console.log({additionalTotal})
+      /* console.log({additionalTotal}) */
 
       const additionalPet = Number(formProperty.pets) === 0 ? 0 : 60;
 
@@ -272,7 +272,7 @@ export default function Form({ serviceSelected }) {
     }
 
     return null;
-  }, [residencialService, standardAdditionalService, deepAdditionalServices, formProperty.pets, formProperty.buildingSize]);
+  }, [residentialService, standardAdditionalService, deepAdditionalServices, formProperty.pets, formProperty.buildingSize]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -290,6 +290,19 @@ export default function Form({ serviceSelected }) {
       return accumulator;
     }
 
+    function checkedHandymanServicesToString(accumulator, service) {
+      if (service.checked) {
+        if (accumulator.length > 0) {
+            accumulator += ', ';
+        }
+        accumulator += `${service.name}`;
+      }
+
+      return accumulator;
+    }
+
+    console.log({typeProperty, residentialService})
+
     if (typeProperty === 'Commercial') {
       message = (`
         email: ${formContact.email},
@@ -302,139 +315,151 @@ export default function Form({ serviceSelected }) {
         more informations: ${moreInformations},
       `);
       //return;
-    }
-
-    if (residencialService === 'Handyman') {
-      message = (`
-        email: ${formContact.email},
-        phone: ${formContact.phone},
-        zip code: ${formContact.zipCode},
-        -
-        service: ${residencialService},
-        services: ${checkboxValues.filter((item) => item.checked)},
-        more informations: ${moreInformations},
-      `);
-      //return
-    }
-
-    if (residencialService === 'Standard Clean') {
-      message = (`
-        email: ${formContact.email},
-        phone: ${formContact.phone},
-        zip code: ${formContact.zipCode},
-        -
-        building size: ${formProperty.buildingSize},
-        rooms: ${formProperty.rooms},
-        bathrooms: ${formProperty.bathrooms},
-        pets: ${formProperty.pets},
-        -
-        service: ${residencialService},
-        additional services: ${standardAdditionalService.reduce(checkedServicesToString, '')},
-        more informations: ${moreInformations},
-        how often: ${interval},
-        budget: ${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })},
-      `);
-      //return;
-    }
-
-    if (residencialService === 'Deep Clean') {
-      message = (`
-        email: ${formContact.email},
-        phone: ${formContact.phone},
-        zip code: ${formContact.zipCode},
-        -
-        building size: ${formProperty.buildingSize},
-        rooms: ${formProperty.rooms},
-        bathrooms: ${formProperty.bathrooms},
-        pets: ${formProperty.pets},
-        -
-        service: ${residencialService},
-        additional services: ${deepAdditionalService.reduce(checkedServicesToString, '')},
-        more informations: ${moreInformations},
-        how often: ${interval},
-        budget: ${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })},
-      `);
-      //return;
-    }
-
-    if (residencialService === 'Move In/Out') {
-      message = (`
-        email: ${formContact.email},
-        phone: ${formContact.phone},
-        zip code: ${formContact.zipCode},
-        -
-        building size: ${formProperty.buildingSize},
-        rooms: ${formProperty.rooms},
-        bathrooms: ${formProperty.bathrooms},
-        pets: ${formProperty.pets},
-        -
-        service: ${residencialService},
-        more informations: ${moreInformations},
-      `);
-      //return;
-    }
-
-    if (residencialService === 'Carpet Cleaning') {
-      message = (`
-        email: ${formContact.email},
-        phone: ${formContact.phone},
-        zip code: ${formContact.zipCode},
-        -
-        building size: ${formProperty.buildingSize},
-        rooms: ${formProperty.rooms},
-        -
-        service: ${residencialService},
-        more informations: ${moreInformations},
-      `);
-      //return;
-    }
-
-    if (residencialService === 'Vacation Rental') {
-      message = (`
-        email: ${formContact.email},
-        phone: ${formContact.phone},
-        zip code: ${formContact.zipCode},
-        -
-        building size: ${formProperty.buildingSize},
-        rooms: ${formProperty.rooms},
-        bathrooms: ${formProperty.bathrooms},
-        -
-        service: ${residencialService},
-        more informations: ${moreInformations},
-      `);
-      //return;
+    } else {
+      if (residentialService === 'Handyman') {
+        message = (`
+          email: ${formContact.email},
+          phone: ${formContact.phone},
+          zip code: ${formContact.zipCode},
+          -
+          service: ${residentialService},
+          services: ${checkboxValues.reduce(checkedHandymanServicesToString, '')},
+          more informations: ${moreInformations},
+        `);
+        //return
+      }
+  
+      if (residentialService === 'Standard Clean') {
+        message = (`
+          email: ${formContact.email},
+          phone: ${formContact.phone},
+          zip code: ${formContact.zipCode},
+          -
+          building size: ${formProperty.buildingSize},
+          rooms: ${formProperty.rooms},
+          bathrooms: ${formProperty.bathrooms},
+          pets: ${formProperty.pets},
+          -
+          service: ${residentialService},
+          additional services: ${standardAdditionalService.reduce(checkedServicesToString, '')},
+          more informations: ${moreInformations},
+          how often: ${interval},
+          budget: ${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })},
+        `);
+        //return;
+      }
+  
+      if (residentialService === 'Deep Clean') {
+        message = (`
+          email: ${formContact.email},
+          phone: ${formContact.phone},
+          zip code: ${formContact.zipCode},
+          -
+          building size: ${formProperty.buildingSize},
+          rooms: ${formProperty.rooms},
+          bathrooms: ${formProperty.bathrooms},
+          pets: ${formProperty.pets},
+          -
+          service: ${residentialService},
+          additional services: ${deepAdditionalService.reduce(checkedServicesToString, '')},
+          more informations: ${moreInformations},
+          how often: ${interval},
+          budget: ${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })},
+        `);
+        //return;
+      }
+  
+      if (residentialService === 'Move In/Out') {
+        message = (`
+          email: ${formContact.email},
+          phone: ${formContact.phone},
+          zip code: ${formContact.zipCode},
+          -
+          building size: ${formProperty.buildingSize},
+          rooms: ${formProperty.rooms},
+          bathrooms: ${formProperty.bathrooms},
+          pets: ${formProperty.pets},
+          -
+          service: ${residentialService},
+          more informations: ${moreInformations},
+        `);
+        //return;
+      }
+  
+      if (residentialService === 'Carpet Cleaning') {
+        message = (`
+          email: ${formContact.email},
+          phone: ${formContact.phone},
+          zip code: ${formContact.zipCode},
+          -
+          building size: ${formProperty.buildingSize},
+          rooms: ${formProperty.rooms},
+          -
+          service: ${residentialService},
+          more informations: ${moreInformations},
+        `);
+        //return;
+      }
+  
+      if (residentialService === 'Vacation Rental') {
+        message = (`
+          email: ${formContact.email},
+          phone: ${formContact.phone},
+          zip code: ${formContact.zipCode},
+          -
+          building size: ${formProperty.buildingSize},
+          rooms: ${formProperty.rooms},
+          bathrooms: ${formProperty.bathrooms},
+          -
+          service: ${residentialService},
+          more informations: ${moreInformations},
+        `);
+        //return;
+      }
     }
 
     console.log(message);
 
-    /* const templateParams = {
+    setIsloading(true);
+
+    const templateParams = {
       from_email: formContact.email,
       message,
-      service: typeProperty === 'Commercial' ? typeProperty : residencialService,
+      service: typeProperty === 'Commercial' ? typeProperty : residentialService,
     }
-
-    emailjs.send("service_mrvfs3a", "template_ci3zktl", templateParams, "92THF5nm3464N9pdX")
+    
+    emailjs.send("service_chwcqnk", "template_ci3zktl", templateParams, "92THF5nm3464N9pdX")
       .then((response) => {
         console.log("Email enviado", response.status, response.text);
 
         setAlertOpen(true);
+        setIsloading(false);
+        // window.scrollTo(0, 0);
       }, (err) => {
         console.log("error:", err);
-      }); */
-
-    setAlertOpen(true);
-    window.scrollTo(0, 0);
+        setIsloading(false);
+      });
   }
 
   const [alertOpen, setAlertOpen] = useState(false);
-  if (alertOpen) {
+
+  const [isLoading, setIsloading] = useState(false);
+
+  /* if (alertOpen) {
     return (
       <Alert onClose={() => setAlertOpen(false)} />
     )
-  }
+  } */
 
   return (
     <Container>
+
+      {
+        alertOpen && (
+          <Alert onClose={() => setAlertOpen(false)} />
+        )
+      }
+      
       <Reveal delay='0'>
         <h2>Get in contact!</h2>
       </Reveal>
@@ -451,21 +476,21 @@ export default function Form({ serviceSelected }) {
       
 
       {
-        typeProperty === 'Residencial' && (
+        typeProperty === 'Residential' && (
           <>
             <Reveal>
               <FormGroup label="Choose the service" icon='email'>
                 <RadioContainer 
-                  options={residencialServices}
-                  selectedOption={residencialService}
-                  onOptionChange={handleResidencialServiceChange}
+                  options={residentialServices}
+                  selectedOption={residentialService}
+                  onOptionChange={handleResidentialServiceChange}
                 />
               </FormGroup>
             </Reveal>
 
             {
-              /* !['Handyman', 'Carpet Cleaning'].includes(residencialService) && ( */
-              residencialService !== 'Handyman' && (
+              /* !['Handyman', 'Carpet Cleaning'].includes(residentialService) && ( */
+              residentialService !== 'Handyman' && (
                 <Reveal delay='0.3'>
                   <RowContainer>
                     <FormGroup label='Building size' icon='ruler'>
@@ -489,7 +514,7 @@ export default function Form({ serviceSelected }) {
                     </FormGroup>
 
                     {
-                      residencialService !== 'Carpet Cleaning' && (
+                      residentialService !== 'Carpet Cleaning' && (
                         <FormGroup label='Bathrooms' icon='bathroom'>
                           <input 
                             type='tel' 
@@ -503,7 +528,7 @@ export default function Form({ serviceSelected }) {
                     }
 
                     {
-                      !['Carpet Cleaning', 'Vacation Rental', 'Handyman'].includes(residencialService) && (
+                      !['Carpet Cleaning', 'Vacation Rental', 'Handyman'].includes(residentialService) && (
                         <FormGroup label='Pets' icon='email'>
                           <input 
                             type='tel' 
@@ -524,7 +549,7 @@ export default function Form({ serviceSelected }) {
       }
 
       {
-        (residencialService === 'Standard Clean' && typeProperty === 'Residencial') && (
+        (residentialService === 'Standard Clean' && typeProperty === 'Residential') && (
           <Reveal delay='0'>
             <FormGroup label="Additional services" icon='tools'>
               <CheckboxContainer
@@ -537,7 +562,7 @@ export default function Form({ serviceSelected }) {
       }
 
 {
-        (residencialService === 'Deep Clean' && typeProperty === 'Residencial') && (
+        (residentialService === 'Deep Clean' && typeProperty === 'Residential') && (
           <Reveal delay='0'>
             <FormGroup label="Additional services" icon='tools'>
               <CheckboxContainer
@@ -550,7 +575,7 @@ export default function Form({ serviceSelected }) {
       }
 
       {
-        (residencialService === 'Handyman' && typeProperty === 'Residencial') && (
+        (residentialService === 'Handyman' && typeProperty === 'Residential') && (
           <Reveal delay='0'>
             <FormGroup label="Handyman's services" icon='tools'>
               <CheckboxContainer
@@ -564,7 +589,7 @@ export default function Form({ serviceSelected }) {
       }
 
       {
-        (['Standard Clean', 'Deep Clean'].includes(residencialService) && typeProperty === 'Residencial') && (
+        (['Standard Clean', 'Deep Clean'].includes(residentialService) && typeProperty === 'Residential') && (
           <Reveal delay='0'>
             <FormGroup label="How often?" icon='calendar'>
               <RadioContainer 
@@ -651,9 +676,25 @@ export default function Form({ serviceSelected }) {
 
       <ButtonForm 
         onClick={handleSubmit}
-        disabled={!isFormValid}
+        disabled={!isFormValid || isLoading}
       >
-        Schedule a date {(budget && isFormValid) && `${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`}
+        {
+          !isLoading 
+            ? (
+              budget && isFormValid 
+                ? (
+                  `Schedule a date ${(budget && isFormValid) && `${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`}`
+                ) : (
+                  'Schedule a date'
+                )
+              /* `Schedule a date ${(budget && isFormValid) && `${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`}` */
+            ) : (
+              <div className="loader"></div>
+            )
+        }
+        
+
+        {/* Schedule a date {(budget && isFormValid) && `${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`} */}
       </ButtonForm>
     </Container>
   )
