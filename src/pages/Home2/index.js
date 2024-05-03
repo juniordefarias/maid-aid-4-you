@@ -5,7 +5,7 @@ import {
 } from './styles';
 
 import Section from '../../components/Section';
-import Button from '../../components/Button/Button';
+import Button from '../../components/Button';
 import Form from '../../components/Form2';
 import MapsContainer from '../../components/MapsContainer';
 
