@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import Button from '../Button/Button';
+import Button from '../Button';
 
 const breakpoints = {
   small: '576px',
