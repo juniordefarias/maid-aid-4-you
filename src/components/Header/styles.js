@@ -15,7 +15,7 @@ const respondTo = (size) => (content) => css`
 
 export const Container = styled.header`
   max-width: 1200px;
-  width: calc(100% - 40px);
+  width: calc(100% - 32px);
   margin: auto;
 
   padding: 24px 0;
@@ -23,6 +23,13 @@ export const Container = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  z-index: 1000;
 
   button.button-menu {
    display: block;
@@ -47,10 +54,16 @@ export const Container = styled.header`
   }
 
   h4 {
-    font-size: 28px;
-    color: blue;
+    font-size: 24px;
+    color: ${({ theme }) => theme.colors.primary.main};
 
     cursor: pointer;
+  }
+
+  svg {
+    path {
+      fill: ${({ theme }) => theme.colors.primary.main};
+    }
   }
 
   nav.nav-desktop {
@@ -68,15 +81,24 @@ export const Container = styled.header`
       gap: 48px;
 
       li {
-        color: gray;
+        color: #8F1F5C;
         cursor: pointer;
+
+        font-size: 20px;
 
         padding: 12px 2px 8px;
 
         transition: all 0.4s ease;
 
         &:hover {
-          color: blue;
+          color: ${({ theme }) => theme.colors.primary.main};
+        }
+
+        &.selected {
+          color: ${({ theme }) => theme.colors.primary.main};
+          svg path {
+            fill: ${({ theme }) => theme.colors.primary.main};
+          }
         }
       }
     }

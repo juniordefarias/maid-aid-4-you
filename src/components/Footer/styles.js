@@ -21,9 +21,9 @@ export const Container = styled.footer`
 
 export const ContentContainer = styled.div`
   
-  max-width: 960px;
+  /* max-width: 960px;
   width: calc(100% - 40px);
-  margin: auto;
+  margin: auto; */
 
   color: ${({ theme }) => theme.colors.primary.light};
   padding: 88px 0 64px;
@@ -78,11 +78,14 @@ export const LogoContainer = styled.div`
     font-size: 36px;
     margin-bottom: 24px;
   }
+
 `;
 
 export const InfoContainer = styled.div`
   display: grid;
   gap: 54px;
+
+  flex: 1;
 
   h3 {
     //color: white;
@@ -92,6 +95,19 @@ export const InfoContainer = styled.div`
   ul {
     display: grid;
     gap: 12px;
+  }
+
+  li {
+    ul {
+      display: flex;
+
+      svg {
+        path {
+          transition: all 0.2s ease-in;
+          fill: ${({ theme }) => theme.colors.primary.light};
+        }
+      }
+    }
   }
 
   a {

@@ -15,7 +15,74 @@ const respondTo = (size) => (content) => css`
   }
 `;
 
-export const Container = styled.form`
+export const Container = styled.section`
+  /* background-color: ${({ theme }) => theme.colors.primary.light}; */
+
+  max-width: 1200px;
+  width: calc(100% - 32px);
+  margin: auto;
+
+  display: grid;
+  gap: 64px;
+
+  .container__content {
+    color: ${({ theme }) => theme.colors.primary.dark};
+    
+
+    div {
+      position: sticky;
+      top: 124px;
+      z-index: 100;
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      color: ${({ theme }) => theme.colors.primary.dark};
+      line-height: 110%;
+      font-weight: 800;
+
+      span {
+        color: ${({ theme }) => theme.colors.primary.main};
+      }
+    }
+
+    ${respondTo('medium')`
+      text-align: center;
+
+      h2 {
+        font-size: 54px;
+      }
+
+      p {
+        font-size: 18px;
+        max-width: 440px;
+        margin: 0 auto;
+      }
+      
+    `}
+
+    ${respondTo('large')`
+      justify-self: start;
+      text-align: start;
+      /* max-width: 420px; */
+    `}
+  }
+
+  /* ${respondTo('medium')`
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  `} */
+
+  ${respondTo('large')`
+    grid-template-columns: repeat(2, 1fr);
+  `}
+
+  ${respondTo('xlarge')`
+    grid-template-columns: 1fr 600px;
+  `}
+`;
+
+export const FormContainer = styled.form`
   border: 1px solid ${({ theme }) => theme.colors.gray.light};
   border-radius: 16px;
 
@@ -26,24 +93,11 @@ export const Container = styled.form`
 
   padding: 48px 16px;
 
-  ${respondTo('medium')`
+  /* ${respondTo('medium')`
     padding: 48px;
-  `}
+  `} */
 
   background-color: ${({ theme }) => theme.colors.white};
-
-  h2 {
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 110%;
-
-    text-align: center;
-
-    color: ${({ theme }) => theme.colors.primary.main};
-
-    margin-bottom: 32px;
-  }
 `;
 
 export const ButtonForm = styled(Button)`
@@ -86,9 +140,13 @@ export const RowContainer = styled.div`
 
   display: grid;
 
-  ${respondTo('medium')`
+  /* ${respondTo('medium')`
     display: flex;
-  `}
+  `} */
+
+  & > div {
+    min-width: 168px;
+  }
 
   & > div:first-of-type {
     ${({ $flex }) => $flex && 'flex: 2;'}
@@ -97,10 +155,10 @@ export const RowContainer = styled.div`
   & > div:not(:first-of-type) {
     border-radius: 0;
     border-top: 1px solid ${({ theme }) => theme.colors.gray.light};
-    ${respondTo('medium')`
+    /* ${respondTo('medium')`
       border: none;
       border-left: 1px solid #E6E6E6;
-    `}
+    `} */
   }
 
   & > div {

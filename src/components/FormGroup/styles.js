@@ -59,10 +59,17 @@ export const Container = styled.div`
     font-size: 18px;
     font-style: normal;
     font-weight: 300;
+
+    background-color: #f0f0f0;
+    padding: 8px 16px;
+
+    border-radius: 8px;
   }
 
   textarea {
     min-height: 120px;
+
+    padding: 16px;
   }
 
   select {

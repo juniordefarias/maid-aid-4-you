@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 
 import emailjs from '@emailjs/browser';
 
-import { Container, ButtonForm, RowContainer } from './styles';
+import { Container, FormContainer, ButtonForm, RowContainer } from './styles';
 
 import FormGroup from '../FormGroup';
 import RadioContainer from '../RadioContainer';
@@ -39,9 +39,7 @@ export default function Form({ serviceSelected }) {
   const residentialServices = [
     'Standard Clean',
     'Deep Clean',
-    'Handyman',
     'Move In/Out',
-    'Carpet Cleaning',
     'Vacation Rental'
   ];
   const [residentialService, setResidentialService] = useState(residentialServices[0]);
@@ -101,66 +99,6 @@ export default function Form({ serviceSelected }) {
     ));
 
     setCheckboxValues(stateUpdate);
-  };
-
-  const standardAdditionalServices = [
-    {name: 'Change sheets', value: 15},
-    {name: 'Fridge cleaning', value: 30},
-    {name: 'Oven cleaning', value: 20},
-    {name: 'Cabinets inside cleaning', value: 30},
-    {name: 'Baseboard cleaning with Bleach', value: 30},
-    {name: 'Blinds cleaning with bleach', value: 30},
-    {name: 'Windows inside/outside', value: 10},
-  ];
-  const [standardAdditionalService, setStandardAdditionalService] = useState(
-    standardAdditionalServices.map((option, index) => (
-      { 
-        id: index, 
-        name: option.name,
-        value: option.value, 
-        checked: false 
-      }
-    ))
-  );
-  function handleStandardAdditionalServiceChange(event) {
-    const { id, name, checked } = event.target;
-
-    const stateUpdate = standardAdditionalService.map((checkbox) => (
-      checkbox.id === Number(id)
-       ? {...checkbox, checked: !checkbox.checked}
-       : checkbox
-    ));
-
-    setStandardAdditionalService(stateUpdate);
-  };
-
-  const deepAdditionalServices = [
-    {name: 'Fridge cleaning', value: 30},
-    {name: 'Oven cleaning', value: 20},
-    {name: 'Organize pantry itens', value: 20},
-    {name: 'Organize cabinets', value: 50},
-    {name: 'Vaccum and swiffer in the garage', value: 20},
-  ];
-  const [deepAdditionalService, setDeepAdditionalService] = useState(
-    deepAdditionalServices.map((option, index) => (
-      { 
-        id: index, 
-        name: option.name,
-        value: option.value, 
-        checked: false 
-      }
-    ))
-  );
-  function handleDeepAdditionalServiceChange(event) {
-    const { id, name, checked } = event.target;
-
-    const stateUpdate = deepAdditionalService.map((checkbox) => (
-      checkbox.id === Number(id)
-       ? {...checkbox, checked: !checkbox.checked}
-       : checkbox
-    ));
-
-    setDeepAdditionalService(stateUpdate);
   };
 
   const [formContact, setFormContact] = useState({
@@ -234,46 +172,6 @@ export default function Form({ serviceSelected }) {
 
   const isFormValid = formContact.email !== '' && formContact.phone !== '' && formContact.zipCode !== '' && errors.length === 0 && (residentialService === 'Handyman' || formProperty.buildingSize !== '') ? true : false;
 
-  const budget = useMemo(() => {
-    if (residentialService === 'Standard Clean') {
-      const valueBase = 85;
-
-      const additionalTotal = standardAdditionalService.reduce((total, item) => {
-          if (item.checked) {
-              return total + Number(item.value);
-          }
-          return total;
-      }, 0);
-
-      const additionalPet = Number(formProperty.pets) === 0 ? 0 : 30;
-
-      const calc = (0.08 * Number(formProperty.buildingSize) + additionalTotal + additionalPet);
-
-      return calc > valueBase ? calc : valueBase
-    }
-
-    if (residentialService === 'Deep Clean') {
-      const valueBase = 170;
-
-        const additionalTotal = deepAdditionalService.reduce((total, item) => {
-          if (item.checked) {
-              return total + Number(item.value);
-          }
-          return total;
-      }, 0);
-
-      /* console.log({additionalTotal}) */
-
-      const additionalPet = Number(formProperty.pets) === 0 ? 0 : 60;
-
-      const calc = (0.16 * Number(formProperty.buildingSize) + additionalTotal + additionalPet);
-
-      return calc > valueBase ? calc : valueBase
-    }
-
-    return null;
-  }, [residentialService, standardAdditionalService, deepAdditionalServices, formProperty.pets, formProperty.buildingSize]);
-
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -341,10 +239,8 @@ export default function Form({ serviceSelected }) {
           pets: ${formProperty.pets},
           -
           service: ${residentialService},
-          additional services: ${standardAdditionalService.reduce(checkedServicesToString, '')},
           more informations: ${moreInformations},
           how often: ${interval},
-          budget: ${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })},
         `);
         //return;
       }
@@ -361,10 +257,8 @@ export default function Form({ serviceSelected }) {
           pets: ${formProperty.pets},
           -
           service: ${residentialService},
-          additional services: ${deepAdditionalService.reduce(checkedServicesToString, '')},
           more informations: ${moreInformations},
           how often: ${interval},
-          budget: ${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })},
         `);
         //return;
       }
@@ -453,31 +347,33 @@ export default function Form({ serviceSelected }) {
 
   return (
     <Container>
+      <div className='container__content'>
+        <div id='form'></div>
+        <div>
+            <h2>Get in contact! <br /> <span>How can we help?</span></h2>
+            <p>Discover how our cleaning services can bring new life to your home. Select the solution that best fits your needs.</p>
+        </div>
+      </div>
 
-      {
-        alertOpen && (
-          <Alert onClose={() => setAlertOpen(false)} />
-        )
-      }
+      <FormContainer>
+        {
+          alertOpen && (
+            <Alert onClose={() => setAlertOpen(false)} />
+          )
+        }
       
-      <Reveal delay='0'>
-        <h2>Get in contact!</h2>
-      </Reveal>
-
-      <Reveal>
-        <FormGroup label="What's your property?" icon='email'>
-          <RadioContainer 
-            options={properties}
-            selectedOption={typeProperty}
-            onOptionChange={handleTypePropertyChange}
-          />
-        </FormGroup>
-      </Reveal>
+        <Reveal>
+          <FormGroup label="What's your property?" icon='email'>
+            <RadioContainer 
+              options={properties}
+              selectedOption={typeProperty}
+              onOptionChange={handleTypePropertyChange}
+            />
+          </FormGroup>
+        </Reveal>
       
-
-      {
-        typeProperty === 'Residential' && (
-          <>
+        {
+          typeProperty === 'Residential' && (
             <Reveal>
               <FormGroup label="Choose the service" icon='email'>
                 <RadioContainer 
@@ -487,122 +383,75 @@ export default function Form({ serviceSelected }) {
                 />
               </FormGroup>
             </Reveal>
+          )
+        }
+
+        {
+          (['Standard Clean', 'Deep Clean'].includes(residentialService) && typeProperty === 'Residential') && (
+            <Reveal delay='0'>
+              <FormGroup label="How often?" icon='calendar'>
+                <RadioContainer 
+                  options={intervals}
+                  selectedOption={interval}
+                  onOptionChange={handleIntervalChange}
+                />
+              </FormGroup>
+            </Reveal>
+          )
+        }
+
+        <Reveal delay='0.3'>
+          <RowContainer>
+            <FormGroup label='Building size' icon='ruler'>
+              <input 
+                type='tel' 
+                // placeholder='Size in sqft' 
+                name='buildingSize'
+                value={formProperty.buildingSize}
+                onChange={handleFormPropertyChange}
+              />
+            </FormGroup>
+
+            <FormGroup label='Rooms' icon='room'>
+              <input 
+                type='tel' 
+                // placeholder='Quantity of rooms'
+                name='rooms'
+                value={formProperty.rooms}
+                onChange={handleFormPropertyChange}
+              />
+            </FormGroup>
 
             {
-              /* !['Handyman', 'Carpet Cleaning'].includes(residentialService) && ( */
-              residentialService !== 'Handyman' && (
-                <Reveal delay='0.3'>
-                  <RowContainer>
-                    <FormGroup label='Building size' icon='ruler'>
-                      <input 
-                        type='tel' 
-                        placeholder='Size in sqft' 
-                        name='buildingSize'
-                        value={formProperty.buildingSize}
-                        onChange={handleFormPropertyChange}
-                      />
-                    </FormGroup>
-
-                    <FormGroup label='Rooms' icon='room'>
-                      <input 
-                        type='tel' 
-                        placeholder='Quantity of rooms'
-                        name='rooms'
-                        value={formProperty.rooms}
-                        onChange={handleFormPropertyChange}
-                      />
-                    </FormGroup>
-
-                    {
-                      residentialService !== 'Carpet Cleaning' && (
-                        <FormGroup label='Bathrooms' icon='bathroom'>
-                          <input 
-                            type='tel' 
-                            placeholder='Quantity of bathrooms'
-                            name='bathrooms'
-                            value={formProperty.bathrooms}
-                            onChange={handleFormPropertyChange}
-                          />
-                        </FormGroup>
-                      )
-                    }
-
-                    {
-                      !['Carpet Cleaning', 'Vacation Rental', 'Handyman'].includes(residentialService) && (
-                        <FormGroup label='Pets' icon='email'>
-                          <input 
-                            type='tel' 
-                            placeholder='How many pets you have?'
-                            name='pets'
-                            value={formProperty.pets}
-                            onChange={handleFormPropertyChange} 
-                          />
-                        </FormGroup>
-                      )
-                    }
-                  </RowContainer>
-                </Reveal>
+              residentialService !== 'Carpet Cleaning' && (
+                <FormGroup label='Bathrooms' icon='bathroom'>
+                  <input 
+                    type='tel' 
+                    // placeholder='Quantity of bathrooms'
+                    name='bathrooms'
+                    value={formProperty.bathrooms}
+                    onChange={handleFormPropertyChange}
+                  />
+                </FormGroup>
               )
             }
-          </>
-        )
-      }
 
-      {
-        (residentialService === 'Standard Clean' && typeProperty === 'Residential') && (
-          <Reveal delay='0'>
-            <FormGroup label="Additional services" icon='tools'>
-              <CheckboxContainer
-                options={standardAdditionalService}
-                onOptionChange={handleStandardAdditionalServiceChange}
-              />
-            </FormGroup>
-          </Reveal>
-        )
-      }
+            {
+              !['Carpet Cleaning', 'Vacation Rental', 'Handyman'].includes(residentialService) && (
+                <FormGroup label='Pets' icon='email'>
+                  <input 
+                    type='tel' 
+                    // placeholder='How many pets you have?'
+                    name='pets'
+                    value={formProperty.pets}
+                    onChange={handleFormPropertyChange} 
+                  />
+                </FormGroup>
+              )
+            }
+          </RowContainer>
+        </Reveal>
 
-{
-        (residentialService === 'Deep Clean' && typeProperty === 'Residential') && (
-          <Reveal delay='0'>
-            <FormGroup label="Additional services" icon='tools'>
-              <CheckboxContainer
-                options={deepAdditionalService}
-                onOptionChange={handleDeepAdditionalServiceChange}
-              />
-            </FormGroup>
-          </Reveal>
-        )
-      }
-
-      {
-        (residentialService === 'Handyman' && typeProperty === 'Residential') && (
-          <Reveal delay='0'>
-            <FormGroup label="Handyman's services" icon='tools'>
-              <CheckboxContainer
-                options={checkboxValues}
-                onOptionChange={handleCheckboxChange}
-              />
-            </FormGroup>
-          </Reveal>
-          
-        )
-      }
-
-      {
-        (['Standard Clean', 'Deep Clean'].includes(residentialService) && typeProperty === 'Residential') && (
-          <Reveal delay='0'>
-            <FormGroup label="How often?" icon='calendar'>
-              <RadioContainer 
-                options={intervals}
-                selectedOption={interval}
-                onOptionChange={handleIntervalChange}
-              />
-            </FormGroup>
-          </Reveal>
-        )
-      }
-
-      <Reveal>
         <RowContainer $flex={true}>
           <FormGroup 
             label='Email' icon='email'
@@ -660,42 +509,33 @@ export default function Form({ serviceSelected }) {
             )
           }
         </RowContainer>
-      </Reveal>
 
-      <Reveal>
-        <FormGroup label='Tell us more information about your property!' icon='email'>
-          <textarea
-            id="myTextarea"
-            name="comments"
-            value={moreInformations}
-            onChange={handleMoreInformationsChange}
-            placeholder='A brief summary of your  property in order to let us understand the best woy to solve all the problems!'
-          />
-        </FormGroup>
-      </Reveal>
+        <Reveal>
+          <FormGroup label='Tell us more information about your property!' icon='email'>
+            <textarea
+              id="myTextarea"
+              name="comments"
+              value={moreInformations}
+              onChange={handleMoreInformationsChange}
+              placeholder='A brief summary of your  property in order to let us understand the best woy to solve all the problems!'
+            />
+          </FormGroup>
+        </Reveal>
 
-      <ButtonForm 
-        onClick={handleSubmit}
-        disabled={!isFormValid || isLoading}
-      >
-        {
-          !isLoading 
-            ? (
-              budget && isFormValid 
-                ? (
-                  `Schedule a date ${(budget && isFormValid) && `${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`}`
-                ) : (
-                  'Schedule a date'
-                )
-              /* `Schedule a date ${(budget && isFormValid) && `${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`}` */
-            ) : (
-              <div className="loader"></div>
-            )
-        }
-        
-
-        {/* Schedule a date {(budget && isFormValid) && `${Number(budget).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`} */}
-      </ButtonForm>
+        <ButtonForm 
+          onClick={handleSubmit}
+          disabled={!isFormValid || isLoading}
+        >
+          {
+            !isLoading 
+              ? (
+                'Schedule a date'
+              ) : (
+                <div className="loader"></div>
+              )
+          }
+        </ButtonForm>
+      </FormContainer>
     </Container>
   )
 }

@@ -6,6 +6,8 @@ import { Container, NavBar } from './styles';
 
 import HeaderModal from '../../components/HeaderModal';
 
+import logo from '../../assets/images/logo.svg';
+
 export default function Header() {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -40,7 +42,7 @@ export default function Header() {
       />
 
     <Container>
-      <h4><Link to='/'>Unisaúde</Link></h4>
+      <h4><Link to='/'><img src={logo} /></Link></h4>
 
       <button className='button-menu' onClick={handleToggleModal}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path></svg>
@@ -48,18 +50,29 @@ export default function Header() {
 
       <nav className='nav-desktop'>
         <ul>
-          <li>
+          <li
+            className={page === 'home' ? 'selected' : ''}
+          >
             <Link to='/'>Home</Link>
           </li>
-          <li>
-            <Link to='/schedule'>Agendamento</Link>
+          <li
+            className={page === 'aboutus' ? 'selected' : ''}
+          >
+            <Link to='/aboutus'>About us</Link>
           </li>
-          <li>
-            <Link to='/login'>Entrar</Link>
+          <li
+            className={page === 'services' ? 'selected' : ''}
+          >
+            <Link to='/services'>Services</Link>
+          </li>
+          <li
+            className={page === 'contact' ? 'selected' : ''}
+          >
+            <Link to='/contact'>Contact</Link>
           </li>
         </ul>
 
-        <button className='button-register'><Link to='/register'>Cadastrar</Link></button>
+        {/* <button className='button-register'><Link to='/register'>Cadastrar</Link></button> */}
       </nav>
     </Container>
     </>

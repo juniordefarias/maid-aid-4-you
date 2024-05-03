@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export default styled.button`
-display: flex;
+export const Container = styled.button`
+  // display: flex;
   padding: 12px 16px;
   justify-content: center;
   align-items: center;

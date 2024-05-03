@@ -28,7 +28,7 @@ import testimonials2 from '../../assets/images/testimonials-2.svg';
 import testimonials3 from '../../assets/images/testimonials-3.svg';
 
 
-export default function Footer() {
+export default function Home() {
   const [serviceSelected, setServiceSelected] = useState('');
 
   function scrollToForm() {
@@ -52,12 +52,12 @@ export default function Footer() {
         <Section>
           <div>
             <Reveal delay='0.1'>
-              <h1>Smell of a <br/> clean house</h1>
+              <h1>Smell of a clean house</h1>
             </Reveal>
             
             <Reveal delay='0.2'>
               {/* <p>Since 2010, we have been working with the goal of providing high-quality cleaning and handyman services, tailored to meet the unique needs of each client.</p> */}
-              <p>Established in 2010, we are dedicated to delivering top-tier cleaning and handyman services tailored to the unique requirements of each client.</p>
+              <p>Established in 2020, we are dedicated to delivering top-tier cleaning and handyman services tailored to the unique requirements of each client.</p>
             </Reveal>
             <Reveal delay='0.3'>
               <Button onClick={scrollToForm}>Get in contact</Button>
@@ -202,7 +202,7 @@ export default function Footer() {
               </div>
 
               <div>
-                {/* <p>This cleaning company is simply outstanding. They don't just clean but also care for our space as if it were their own. Undoubtedly, the best cleaning service!</p> */}
+                {/* <p>This cleaning company is simply outstanding. They don't just clean but also care for our space as if it were their own. Undoubtedly, the best S service!</p> */}
                 <p>“This cleaning company is outstanding. They {/* not only clean but also  */}care for our space as if it were their own. Undoubtedly, the best cleaning service!”</p>
                 <div>
                 <img src={testimonials3} />

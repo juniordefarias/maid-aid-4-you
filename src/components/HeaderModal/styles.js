@@ -14,7 +14,7 @@ export const Overlay = styled.div`
   justify-content: center;
   align-items: center;
 
-  z-index: 1000;
+  z-index: 10000;
 `;
 
 export const Container = styled.div`
@@ -29,7 +29,7 @@ export const Container = styled.div`
   position: fixed;
   top: 0px;
   right: 0px;
-  z-index: 1002;
+  z-index: 10002;
 
   @keyframes minhaAnimacao {
   0% { opacity: 0; }
@@ -52,6 +52,28 @@ export const Container = styled.div`
       justify-items: center;
 
       li {
+        color: #8F1F5C;
+        cursor: pointer;
+
+        font-size: 20px;
+
+        padding: 12px 2px 8px;
+
+        transition: all 0.4s ease;
+
+        &:hover {
+          color: ${({ theme }) => theme.colors.primary.main};
+        }
+
+        &.selected {
+          color: ${({ theme }) => theme.colors.primary.main};
+          svg path {
+            fill: ${({ theme }) => theme.colors.primary.main};
+          }
+        }
+      }
+
+      /* li {
         padding: 0 24px;
         height: 50px;
         line-height: 40px;
@@ -62,13 +84,14 @@ export const Container = styled.div`
         transition: all 0.2s ease-in;
 
         &.selected {
-          border-left: 8px solid blue;
+          border-left: 8px solid color: ${({ theme }) => theme.colors.primary.main};
         }
 
         &:hover {
-          color: blue;
+          color: ${({ theme }) => theme.colors.primary.main};
         }
-      }
+      } */
+
     }
   }
 

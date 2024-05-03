@@ -38,25 +38,25 @@ export default function HeaderModal({ isOpened, onToggleModal }) {
 
         <nav>
           <ul>
-            <li 
-              /* className={page === 'home' ? 'selected' : ''} */
+            <li
+              className={page === 'home' ? 'selected' : ''}
             >
-              <Link to="/">Home</Link>
+              <Link to='/'>Home</Link>
             </li>
-            <li 
-              /* className={page === 'schedule' ? 'selected' : ''} */
+            <li
+              className={page === 'aboutus' ? 'selected' : ''}
             >
-              <Link to="/schedule">Agendamento</Link>
+              <Link to='/aboutus'>About us</Link>
             </li>
-            <li 
-              /* className={page === 'login' ? 'selected' : ''} */
+            <li
+              className={page === 'services' ? 'selected' : ''}
             >
-              <Link to="/login">Entrar</Link>
+              <Link to='/services'>Services</Link>
             </li>
-            <li 
-              /* className={page === 'register' ? 'selected' : ''} */
+            <li
+              className={page === 'contact' ? 'selected' : ''}
             >
-              <Link to="/register">Cadastrar</Link>
+              <Link to='/contact'>Contact</Link>
             </li>
           </ul>
         </nav>
