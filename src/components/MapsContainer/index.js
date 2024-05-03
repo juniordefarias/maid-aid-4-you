@@ -1,7 +1,7 @@
 import { Container } from './styles';
 
 import Section from '../../components/Section';
-import Button from '../Button/Button';
+import Button from '../Button';
 
 import MaidSVG from '../../assets/images/MaidAidMaps.svg';
 

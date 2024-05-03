@@ -4,7 +4,7 @@ import { Container, Checklist } from './styles';
 
 import Form from '../../components/Form2';
 import Section from '../../components/Section';
-import Button from '../Button/Button';
+import Button from '../Button';
 
 export default function ChecklistContainer({ serviceSelected }) {
   const [topic, setTopic] = useState(1);
