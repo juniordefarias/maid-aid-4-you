@@ -52,6 +52,8 @@ export const HomeContainer = styled.div`
     li {
       display: flex;
       flex-direction: column;
+
+      cursor: pointer;
     }
 
     img {
@@ -183,7 +185,23 @@ export const KnowMore = styled.div`
         margin-top: 48px;
       `}
     }
-    
+
+    ol {
+      margin-top: 16px;
+      margin-bottom: 16px;
+
+      display: grid;
+      gap: 12px;
+
+      font-weight: 300;
+
+      li {
+        font-size: 18px;
+        list-style-type: decimal;
+
+        margin-left: 24px;
+      }
+    }
   }
 
 

@@ -116,9 +116,9 @@ export const Container = styled.header`
     }
   }
 
-  ${respondTo('small')`
+  /* ${respondTo('small')`
     width: calc(100% - 104px);
-  `}
+  `} */
 `;
 
 export const NavBar = styled.nav`

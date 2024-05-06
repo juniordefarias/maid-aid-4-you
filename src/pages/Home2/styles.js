@@ -34,31 +34,59 @@ export const Container = styled.main`
 export const HomeContainer = styled.div`
   padding: 148px 0;
 
+  ${respondTo('medium')`
+    padding: 148px 0 370px;
+  `}
+
   background-color: ${({ theme }) => theme.colors.primary.dark};
   color: ${({ theme }) => theme.colors.primary.light};
 
   text-align: center;
 
-  position: relative;
+  & > section {
+    position: relative;
+  }
 
   .home__content {
     max-width: 600px;
     margin: 0 auto 24px;
+
+    h1 {
+      font-size: 60px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-weight: 300;
+      margin-bottom: 32px;
+    }
   }
 
-  h1 {
-    font-size: 60px;
-    font-weight: 800;
-    margin-bottom: 16px;
-  }
+  .home__img {
+    // background-color: red;
 
-  p {
-    font-weight: 300;
-    margin-bottom: 32px;
+    max-width: 1200px;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    margin-bottom: -100px;
+    z-index: 100;
+
+    svg {
+      max-width: 500px;
+    }
   }
 
   img {
-    max-width: 660px;
+    max-width: 600px;
 
     width: 80%;
 
@@ -74,7 +102,7 @@ export const HomeContainer = styled.div`
     `}
   }
 
-  svg {
+  /* svg {
     width: 80%;
 
     position: absolute;
@@ -104,7 +132,7 @@ export const HomeContainer = styled.div`
         transform: translateX(600px);
       `}
     }
-  }
+  } */
 `;
 
 export const FreeContainer = styled.div`
@@ -174,6 +202,7 @@ export const ServicesContainer = styled.div`
     
     ${respondTo('large')`
       max-width: 1200px;
+      width: calc(100% - 32px);
       margin: 0 auto 64px;
       padding: 0px;
       
@@ -213,6 +242,7 @@ export const ServicesContainer = styled.div`
       gap: 24px;
 
       max-width: 1200px;
+      width: calc(100% - 32px);
       margin: auto;
       padding: 0px;
     `}
@@ -314,8 +344,9 @@ export const TestimonialsContainer = styled.div`
       gap: 24px;
 
       max-width: 1200px;
+      width: calc(100% - 32px);
       margin: auto;
-      padding: 0px;
+      padding: 16px 0px 0px;
     `}
 
     padding-left: 16px;
@@ -351,14 +382,24 @@ export const TestimonialsContainer = styled.div`
         width: auto;
       } */
 
+      position: relative;
+
+      .quote {
+        position: absolute;
+        width: 76px;
+
+        right: 32px;
+        top: -16px;
+      }
+
       div {
         display: flex;
         align-items: center;
         gap: 8px;
-      }
 
-      img {
-        width: 32px;
+        img {
+          width: 32px;
+        }
       }
 
       strong {
@@ -366,7 +407,7 @@ export const TestimonialsContainer = styled.div`
       }
 
       p {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 300;
         text-align: justify;
         line-height: 110%;

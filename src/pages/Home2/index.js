@@ -23,6 +23,7 @@ import serviceStandardClean from '../../assets/images/serviceStandardClean.png';
 import serviceMoveInMoveOut from '../../assets/images/serviceMoveInMoveOut.png';
 import serviceVacationRental from '../../assets/images/serviceVacationRental.png';
 
+import quote from '../../assets/images/quote.svg';
 
 export default function Home() {
   const [serviceSelected, setServiceSelected] = useState('');
@@ -44,16 +45,17 @@ export default function Home() {
             <p>Established in 2020, we are dedicated to delivering top-tier cleaning services tailored to the unique requirements of each client.</p>
             <Button>Get in contact</Button>
           </div>
-          <img src={homeImg} id='homeImg' />
+          <div className='home__img'>
+            <svg /* width="459" height="356" */ viewBox="0 0 459 356" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M85.1916 70.3286C109.121 50.3624 238.899 20.4 303.274 58.9178C383.742 107.065 156.475 116.321 55.1139 166.717C-46.2468 217.113 363.6 155.788 412.276 179.2C460.951 202.613 224.053 183.213 156.855 271.525C89.6558 359.837 267.303 290.729 390.546 275.934" stroke="#8F1F5C" strokeWidth="80"/>
+            </svg>
+              <img src={homeImg} id='homeImg' />
+            <svg /* width="511" height="382" */ viewBox="0 0 511 382" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M357.86 39.9478L6.57617 93.6687L450.352 139.097C402.705 146.823 158.491 183.385 103.93 192.285C49.3685 201.186 404.885 223.208 498 234.642L125.579 294.783C167.309 296.637 436.988 300.129 478.095 358.722" stroke="#8F1F5C" strokeWidth="80"/>
+            </svg>
+          </div>
+          
         </Section>
-
-        <svg width="459" height="356" viewBox="0 0 459 356" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M85.1916 70.3286C109.121 50.3624 238.899 20.4 303.274 58.9178C383.742 107.065 156.475 116.321 55.1139 166.717C-46.2468 217.113 363.6 155.788 412.276 179.2C460.951 202.613 224.053 183.213 156.855 271.525C89.6558 359.837 267.303 290.729 390.546 275.934" stroke="#8F1F5C" stroke-width="80"/>
-        </svg>
-
-        <svg width="511" height="382" viewBox="0 0 511 382" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M357.86 39.9478L6.57617 93.6687L450.352 139.097C402.705 146.823 158.491 183.385 103.93 192.285C49.3685 201.186 404.885 223.208 498 234.642L125.579 294.783C167.309 296.637 436.988 300.129 478.095 358.722" stroke="#8F1F5C" strokeWidth="80"/>
-        </svg>
       </HomeContainer>
 
       <FreeContainer>
@@ -139,24 +141,30 @@ export default function Home() {
               <img src={testimonials1} />
               <strong>James Anderson</strong>
             </div>
+            
+            <img src={quote} className='quote'/>
           </div>
 
           <div>
             <p>Their weekly standard cleaning keeps our home pristine all the time. It's a relief to know I can trust them to keep things clean and organized. Reliable and professional service!</p>
             {/* <p>“Their weekly standard cleaning keeps our home pristine all the time. Reliable and professional service!”</p> */}
             <div>
-            <img src={testimonials2} />
+              <img src={testimonials2} />
               <strong>Michael Davis</strong>
             </div>
+
+            <img src={quote} className='quote' />
           </div>
 
           <div>
             <p>This cleaning company is simply outstanding. They don't just clean but also care for our space as if it were their own. Undoubtedly, the best S service!</p>
             {/* <p>“This cleaning company is outstanding. They care for our space as if it were their own. Undoubtedly, the best cleaning service!”</p> */}
             <div>
-            <img src={testimonials3} />
+              <img src={testimonials3} />
               <strong>Amanda Harris</strong>
             </div>
+
+            <img src={quote} className='quote' />
           </div>
         </section>
         <Button>Get in contact</Button>

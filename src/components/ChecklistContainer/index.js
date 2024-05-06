@@ -14,7 +14,8 @@ export default function ChecklistContainer({ serviceSelected }) {
       <Section>
         <div>
           <h2>Our biggest differential is the <span>attention to every detail.</span></h2>
-          <p>Est eius ipsum aut autem ullam aut cumque molestiae est praesentium quod quo itaque mollitia ut asperiores</p>
+          <p>Because we know it's in the little details where the real difference is made. Let us show you how our dedication to detail can make your home truly spotless.</p>
+          <p>Schedule today and experience the gold standard in cleaning services!</p>
           <Button>Get in contact</Button>
         </div>
         <Checklist>
@@ -23,7 +24,7 @@ export default function ChecklistContainer({ serviceSelected }) {
               onClick={() => setTopic(1)}
             >
               <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 21.9177H5C4.44772 21.9177 4 21.47 4 20.9177V11.9177H1L11.3273 2.52923C11.7087 2.18248 12.2913 2.18248 12.6727 2.52923L23 11.9177H20V20.9177C20 21.47 19.5523 21.9177 19 21.9177ZM13 19.9177H18V10.0752L12 4.62063L6 10.0752V19.9177H11V13.9177H13V19.9177Z" fill="#E41F76"/>
+                <path d="M19 21.9177H5C4.44772 21.9177 4 21.47 4 20.9177V11.9177H1L11.3273 2.52923C11.7087 2.18248 12.2913 2.182348 12.6727 2.52923L23 11.9177H20V20.9177C20 21.47 19.5523 21.9177 19 21.9177ZM13 19.9177H18V10.0752L12 4.62063L6 10.0752V19.9177H11V13.9177H13V19.9177Z" fill="#E41F76"/>
               </svg>
               General
             </strong>
