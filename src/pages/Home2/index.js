@@ -135,33 +135,33 @@ export default function Home() {
         <h2 id='costumers'>What our costumers say</h2>
         <section>
           <div>
-            <p>I hired this team for a deep cleaning before moving, and I was blown away. They left no stone unturned, and even the toughest details were handled with care. Top-notch service!</p>
-            {/* <p>“I hired this team for a deep cleaning before moving, and I was blown away. Top-notch service!”</p> */}
+            {/* <p>I hired this team for a deep cleaning before moving, and I was blown away. They left no stone unturned, and even the toughest details were handled with care. Top-notch service!</p> */}
+            <p>I have been using her services for the last three years, I am always pleased with the cleanliness, attention to detail, and quality of work provided.  I recommend her services to anyone interested in a professional home or business cleaning service.  Top notch, second to none!</p>
             <div>
               <img src={testimonials1} />
-              <strong>James Anderson</strong>
+              <strong>Johnny Allen</strong>
             </div>
             
             <img src={quote} className='quote'/>
           </div>
 
           <div>
-            <p>Their weekly standard cleaning keeps our home pristine all the time. It's a relief to know I can trust them to keep things clean and organized. Reliable and professional service!</p>
-            {/* <p>“Their weekly standard cleaning keeps our home pristine all the time. Reliable and professional service!”</p> */}
+            {/* <p>Their weekly standard cleaning keeps our home pristine all the time. It's a relief to know I can trust them to keep things clean and organized. Reliable and professional service!</p> */}
+            <p>Michelle did an exceptional job on our house! She meticulously cleaned and afterwards sent is picture show casing her thorough work. Notably we had already moved out state! I found her to be extremely professional, trustworthy and great at her job!</p>
             <div>
               <img src={testimonials2} />
-              <strong>Michael Davis</strong>
+              <strong>Rachel Karigi</strong>
             </div>
 
             <img src={quote} className='quote' />
           </div>
 
           <div>
-            <p>This cleaning company is simply outstanding. They don't just clean but also care for our space as if it were their own. Undoubtedly, the best S service!</p>
-            {/* <p>“This cleaning company is outstanding. They care for our space as if it were their own. Undoubtedly, the best cleaning service!”</p> */}
+            {/* <p>This cleaning company is simply outstanding. They don't just clean but also care for our space as if it were their own. Undoubtedly, the best S service!</p> */}
+            <p>We have her clean our home monthly and I don't know what I would do without her! She asks me what products I prefer and knows the way I like the beds made, which I appreciate! She also makes the toilet paper cute. Highly recommend!</p>
             <div>
               <img src={testimonials3} />
-              <strong>Amanda Harris</strong>
+              <strong>Flowertown Charm</strong>
             </div>
 
             <img src={quote} className='quote' />

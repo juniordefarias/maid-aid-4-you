@@ -174,6 +174,7 @@ export const KnowMore = styled.div`
 
     button {
       margin-top: 8px;
+      margin-bottom: 48px;
     }
 
     svg {

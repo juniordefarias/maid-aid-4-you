@@ -16,6 +16,10 @@ import serviceStandardClean from '../../assets/images/serviceStandardClean.png';
 import serviceMoveInMoveOut from '../../assets/images/serviceMoveInMoveOut.png';
 import serviceVacationRental from '../../assets/images/serviceVacationRental.png';
 
+import img1 from '../../assets/images/services-img-1.png';
+import img2 from '../../assets/images/services-img-2.png';
+import img3 from '../../assets/images/services-img-3.png';
+import img4 from '../../assets/images/services-img-4.png';
 
 export default function Services() {
   const [serviceSelected, setServiceSelected] = useState(1);
@@ -151,9 +155,10 @@ export default function Services() {
                     <rect width="450" height="300" transform="translate(0 0.917725)" fill="#CFCFCF"/>
                     <rect width="185" height="84" transform="translate(293 232.918)" fill="#F1F1F1"/>
                   </svg> */}
-                  <svg width="450" height="300" viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* <svg width="450" height="300" viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="450" height="300" fill="#CFCFCF"/>
-                  </svg>
+                  </svg> */}
+                  <img src={img1} />
                 </div>
               )
             }
@@ -167,9 +172,10 @@ export default function Services() {
                     <rect width="450" height="300" transform="translate(0 0.917725)" fill="#CFCFCF"/>
                     <rect width="185" height="84" transform="translate(293 232.918)" fill="#F1F1F1"/>
                   </svg> */}
-                  <svg width="450" height="300" viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* <svg width="450" height="300" viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="450" height="300" fill="#CFCFCF"/>
-                  </svg>
+                  </svg> */}
+                  <img src={img2} />
                 </div>
               )
             }
@@ -184,9 +190,10 @@ export default function Services() {
                     <rect width="450" height="300" transform="translate(0 0.917725)" fill="#CFCFCF"/>
                     <rect width="185" height="84" transform="translate(293 232.918)" fill="#F1F1F1"/>
                   </svg> */}
-                  <svg width="450" height="300" viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* <svg width="450" height="300" viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="450" height="300" fill="#CFCFCF"/>
-                  </svg>
+                  </svg> */}
+                  <img src={img3} />
                 </div>
               )
             }
@@ -209,9 +216,10 @@ export default function Services() {
                     <rect width="450" height="300" transform="translate(0 0.917725)" fill="#CFCFCF"/>
                     <rect width="185" height="84" transform="translate(293 232.918)" fill="#F1F1F1"/>
                   </svg> */}
-                  <svg width="450" height="300" viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* <svg width="450" height="300" viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="450" height="300" fill="#CFCFCF"/>
-                  </svg>
+                  </svg> */}
+                  <img src={img4} />
                 </div>
               )
             }
