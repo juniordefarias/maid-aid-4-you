@@ -64,14 +64,18 @@ export const HomeContainer = styled.div`
   }
 
   .home__img {
-    // background-color: red;
+    //background-color: red;
 
     max-width: 1200px;
 
     width: 100%;
 
+    overflow: visible;
+
+
     display: flex;
     justify-content: space-between;
+
 
     position: absolute;
     left: 50%;

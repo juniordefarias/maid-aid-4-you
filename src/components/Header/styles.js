@@ -60,6 +60,14 @@ export const Container = styled.header`
     cursor: pointer;
   }
 
+  #logo-header {
+    height: 24px;
+
+    width: auto;
+
+    
+  }
+
   svg {
     path {
       fill: ${({ theme }) => theme.colors.primary.main};
@@ -68,6 +76,12 @@ export const Container = styled.header`
 
   nav.nav-desktop {
     display: none;
+
+    min-width: 420px;
+    width: auto;
+
+    display: flex;
+    justify-content: end;
     
     ${respondTo('medium')`
       display: flex;

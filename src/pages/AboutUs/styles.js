@@ -63,7 +63,7 @@ export const HomeContainer = styled.main`
     }
   }
 
-  img {
+  /* img */ .home__img {
     margin-bottom: -245px;
 
     ${respondTo('large')`

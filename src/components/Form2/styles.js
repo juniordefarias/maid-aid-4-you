@@ -29,7 +29,7 @@ export const Container = styled.section`
     color: ${({ theme }) => theme.colors.primary.dark};
     
 
-    div {
+    .container__text {
       position: sticky;
       top: 124px;
       z-index: 100;

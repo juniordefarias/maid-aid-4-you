@@ -349,9 +349,11 @@ export default function Form({ serviceSelected }) {
     <Container>
       <div className='container__content'>
         <div id='form'></div>
-        <div>
-            <h2>Get in contact! <br /> <span>How can we help?</span></h2>
-            <p>Discover how our cleaning services can bring new life to your home. Select the solution that best fits your needs.</p>
+        <div className='container__text'>
+            <Reveal>
+              <h2>Get in contact! <br /> <span>How can we help?</span></h2>
+              <p>Discover how our cleaning services can bring new life to your home. Select the solution that best fits your needs.</p>
+            </Reveal>
         </div>
       </div>
 

@@ -23,6 +23,9 @@ import serviceStandardClean from '../../assets/images/serviceStandardClean.png';
 import serviceMoveInMoveOut from '../../assets/images/serviceMoveInMoveOut.png';
 import serviceVacationRental from '../../assets/images/serviceVacationRental.png';
 
+
+import Reveal from '../../components/Reveal';
+
 import quote from '../../assets/images/quote.svg';
 
 export default function Home() {
@@ -41,41 +44,63 @@ export default function Home() {
       <HomeContainer>
         <Section>
           <div className='home__content'>
-            <h1>Smell of a {/* <br/> */} clean house</h1>
-            <p>Established in 2020, we are dedicated to delivering top-tier cleaning services tailored to the unique requirements of each client.</p>
-            <Button>Get in contact</Button>
+            <Reveal delay='0.1'>
+              <h1>Smell of a {/* <br/> */} clean house</h1>
+            </Reveal>
+            <Reveal delay='0.3'>
+              <p>Established in 2020, we are dedicated to delivering top-tier cleaning services tailored to the unique requirements of each client.</p>
+            </Reveal>
+            <Reveal delay='0.4'>
+              <Button>Get in contact</Button>
+            </Reveal>
           </div>
-          <div className='home__img'>
-            <svg /* width="459" height="356" */ viewBox="0 0 459 356" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M85.1916 70.3286C109.121 50.3624 238.899 20.4 303.274 58.9178C383.742 107.065 156.475 116.321 55.1139 166.717C-46.2468 217.113 363.6 155.788 412.276 179.2C460.951 202.613 224.053 183.213 156.855 271.525C89.6558 359.837 267.303 290.729 390.546 275.934" stroke="#8F1F5C" strokeWidth="80"/>
-            </svg>
-              <img src={homeImg} id='homeImg' />
-            <svg /* width="511" height="382" */ viewBox="0 0 511 382" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M357.86 39.9478L6.57617 93.6687L450.352 139.097C402.705 146.823 158.491 183.385 103.93 192.285C49.3685 201.186 404.885 223.208 498 234.642L125.579 294.783C167.309 296.637 436.988 300.129 478.095 358.722" stroke="#8F1F5C" strokeWidth="80"/>
-            </svg>
-          </div>
+          
+          <Reveal delay="0.5">
+            <div className='home__img'>
+              <svg /* width="459" height="356" */ viewBox="0 0 459 356" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M85.1916 70.3286C109.121 50.3624 238.899 20.4 303.274 58.9178C383.742 107.065 156.475 116.321 55.1139 166.717C-46.2468 217.113 363.6 155.788 412.276 179.2C460.951 202.613 224.053 183.213 156.855 271.525C89.6558 359.837 267.303 290.729 390.546 275.934" stroke="#8F1F5C" strokeWidth="80"/>
+              </svg>
+                <img src={homeImg} id='homeImg' />
+              <svg /* width="511" height="382" */ viewBox="0 0 511 382" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M357.86 39.9478L6.57617 93.6687L450.352 139.097C402.705 146.823 158.491 183.385 103.93 192.285C49.3685 201.186 404.885 223.208 498 234.642L125.579 294.783C167.309 296.637 436.988 300.129 478.095 358.722" stroke="#8F1F5C" strokeWidth="80"/>
+              </svg>
+            </div>
+          </Reveal>
           
         </Section>
       </HomeContainer>
 
       <FreeContainer>
         <Section>
-          <img id='aboutUs' src={imgAboutUs} />
+          <Reveal>
+            <img id='aboutUs' src={imgAboutUs} />
+          </Reveal>
           <div>
-              <h2>Break free from Cleaning and focus on What Truly Matters.</h2>
-              <p>We understand that modern life is hectic. That's why we offer exceptional cleaning services to help you reclaim your precious time. Just imagine the possibilities when you no longer have to worry about cleaning your home. Instead, you can focus on the things that truly matter.</p>
+              <Reveal delay='0.4'>
+                <h2>Break free from Cleaning and focus on What Truly Matters.</h2>
+              </Reveal>
+              <Reveal delay='0.5'>
+                <p>We understand that modern life is hectic. That's why we offer exceptional cleaning services to help you reclaim your precious time. Just imagine the possibilities when you no longer have to worry about cleaning your home. Instead, you can focus on the things that truly matter.</p>
+              </Reveal>
               {/* <p>Reclaim your precious time with our exceptional cleaning services. Imagine a life where you no longer worry about cleaning your home but instead focus on what truly matters.</p> */}
-              <Button onClick={scrollToForm}>Get in contact</Button>
+              <Reveal delay='0.6'>
+                <Button onClick={scrollToForm}>Get in contact</Button>
+              </Reveal>
           </div>
         </Section>
       </FreeContainer>
 
       <ServicesContainer>
         <div className='services__content'>
-          <h2 id='services'>Know our special services!</h2>
-          <p>Our team of experts uses eco-friendly products and exceptional professionalism to ensure your satisfaction on every visit. Schedule with us to experience the difference and enjoy a truly spotless home!</p>
+          <Reveal>
+            <h2 id='services'>Know our special services!</h2>
+          </Reveal>
+          <Reveal delay='0.4'>
+            <p>Our team of experts uses eco-friendly products and exceptional professionalism to ensure your satisfaction on every visit. Schedule with us to experience the difference and enjoy a truly spotless home!</p>
+          </Reveal>
         </div>
-        <section>
+        <Reveal delay='0.6'>
+          <section>
             <div>
               <img src={serviceDeepClean} />
               <h4>Deep Clean</h4>
@@ -120,6 +145,7 @@ export default function Home() {
               }}>Get in contact</Button>
             </div>
           </section>
+        </Reveal>
       </ServicesContainer>
 
       <div id='form'></div>
@@ -132,42 +158,48 @@ export default function Home() {
       </FormContainer>
 
       <TestimonialsContainer>
-        <h2 id='costumers'>What our costumers say</h2>
-        <section>
-          <div>
-            {/* <p>I hired this team for a deep cleaning before moving, and I was blown away. They left no stone unturned, and even the toughest details were handled with care. Top-notch service!</p> */}
-            <p>I have been using her services for the last three years, I am always pleased with the cleanliness, attention to detail, and quality of work provided.  I recommend her services to anyone interested in a professional home or business cleaning service.  Top notch, second to none!</p>
+        <Reveal>
+          <h2 id='costumers'>What our costumers say</h2>
+        </Reveal>
+        <Reveal delay="0.5">
+          <section>
             <div>
-              <img src={testimonials1} />
-              <strong>Johnny Allen</strong>
-            </div>
-            
-            <img src={quote} className='quote'/>
-          </div>
-
-          <div>
-            {/* <p>Their weekly standard cleaning keeps our home pristine all the time. It's a relief to know I can trust them to keep things clean and organized. Reliable and professional service!</p> */}
-            <p>Michelle did an exceptional job on our house! She meticulously cleaned and afterwards sent is picture show casing her thorough work. Notably we had already moved out state! I found her to be extremely professional, trustworthy and great at her job!</p>
-            <div>
-              <img src={testimonials2} />
-              <strong>Rachel Karigi</strong>
+              {/* <p>I hired this team for a deep cleaning before moving, and I was blown away. They left no stone unturned, and even the toughest details were handled with care. Top-notch service!</p> */}
+              <p>I have been using her services for the last three years, I am always pleased with the cleanliness, attention to detail, and quality of work provided.  I recommend her services to anyone interested in a professional home or business cleaning service.  Top notch, second to none!</p>
+              <div>
+                <img src={testimonials1} />
+                <strong>Johnny Allen</strong>
+              </div>
+              
+              <img src={quote} className='quote'/>
             </div>
 
-            <img src={quote} className='quote' />
-          </div>
-
-          <div>
-            {/* <p>This cleaning company is simply outstanding. They don't just clean but also care for our space as if it were their own. Undoubtedly, the best S service!</p> */}
-            <p>We have her clean our home monthly and I don't know what I would do without her! She asks me what products I prefer and knows the way I like the beds made, which I appreciate! She also makes the toilet paper cute. Highly recommend!</p>
             <div>
-              <img src={testimonials3} />
-              <strong>Flowertown Charm</strong>
+              {/* <p>Their weekly standard cleaning keeps our home pristine all the time. It's a relief to know I can trust them to keep things clean and organized. Reliable and professional service!</p> */}
+              <p>Michelle did an exceptional job on our house! She meticulously cleaned and afterwards sent is picture show casing her thorough work. Notably we had already moved out state! I found her to be extremely professional, trustworthy and great at her job!</p>
+              <div>
+                <img src={testimonials2} />
+                <strong>Rachel Karigi</strong>
+              </div>
+
+              <img src={quote} className='quote' />
             </div>
 
-            <img src={quote} className='quote' />
-          </div>
-        </section>
-        <Button>Get in contact</Button>
+            <div>
+              {/* <p>This cleaning company is simply outstanding. They don't just clean but also care for our space as if it were their own. Undoubtedly, the best S service!</p> */}
+              <p>We have her clean our home monthly and I don't know what I would do without her! She asks me what products I prefer and knows the way I like the beds made, which I appreciate! She also makes the toilet paper cute. Highly recommend!</p>
+              <div>
+                <img src={testimonials3} />
+                <strong>Flowertown Charm</strong>
+              </div>
+
+              <img src={quote} className='quote' />
+            </div>
+          </section>
+        </Reveal>
+        <Reveal delay="0.7">
+          <Button>Get in contact</Button>
+        </Reveal>
       </TestimonialsContainer>
 
       <MapsContainer />

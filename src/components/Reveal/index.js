@@ -14,7 +14,7 @@ export default function Reveal({ children, delay }) {
   }, [isInView]);
 
   return (
-    <div ref={ref} style={{ position: "relative", width: "100%", overflow: "hidden" }}>
+    <div ref={ref} style={{ position: "relative", width: "100%", overflow: "visible" }}>
       <motion.div
         variants={{
           hidden: { opacity: 0, y: 75 },

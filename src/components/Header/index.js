@@ -8,6 +8,8 @@ import HeaderModal from '../../components/HeaderModal';
 
 import logo from '../../assets/images/logo.svg';
 
+import Reveal from '../../components/Reveal';
+
 export default function Header() {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -42,12 +44,16 @@ export default function Header() {
       />
 
     <Container>
-      <h4><Link to='/'><img src={logo} /></Link></h4>
+      <Reveal delay="0.1">
+        <h4><Link to='/'><img src={logo} id='logo-header'/></Link></h4>
+      </Reveal>
+      
 
       <button className='button-menu' onClick={handleToggleModal}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path></svg>
       </button>
 
+    <Reveal>
       <nav className='nav-desktop'>
         <ul>
           <li
@@ -74,6 +80,7 @@ export default function Header() {
 
         {/* <button className='button-register'><Link to='/register'>Cadastrar</Link></button> */}
       </nav>
+    </Reveal>
     </Container>
     </>
   );
