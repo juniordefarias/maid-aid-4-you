@@ -80,7 +80,6 @@ export const Container = styled.header`
     min-width: 420px;
     width: auto;
 
-    display: flex;
     justify-content: end;
     
     ${respondTo('medium')`

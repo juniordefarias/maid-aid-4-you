@@ -53,34 +53,32 @@ export default function Header() {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path></svg>
       </button>
 
-    <Reveal>
-      <nav className='nav-desktop'>
-        <ul>
-          <li
-            className={page === 'home' ? 'selected' : ''}
-          >
-            <Link to='/'>Home</Link>
-          </li>
-          <li
-            className={page === 'aboutus' ? 'selected' : ''}
-          >
-            <Link to='/aboutus'>About us</Link>
-          </li>
-          <li
-            className={page === 'services' ? 'selected' : ''}
-          >
-            <Link to='/services'>Services</Link>
-          </li>
-          <li
-            className={page === 'contact' ? 'selected' : ''}
-          >
-            <Link to='/contact'>Contact</Link>
-          </li>
-        </ul>
-
-        {/* <button className='button-register'><Link to='/register'>Cadastrar</Link></button> */}
-      </nav>
-    </Reveal>
+      {/* <Reveal> */}
+        <nav className='nav-desktop'>
+          <ul>
+            <li
+              className={page === 'home' ? 'selected' : ''}
+            >
+              <Link to='/'>Home</Link>
+            </li>
+            <li
+              className={page === 'aboutus' ? 'selected' : ''}
+            >
+              <Link to='/aboutus'>About us</Link>
+            </li>
+            <li
+              className={page === 'services' ? 'selected' : ''}
+            >
+              <Link to='/services'>Services</Link>
+            </li>
+            <li
+              className={page === 'contact' ? 'selected' : ''}
+            >
+              <Link to='/contact'>Contact</Link>
+            </li>
+          </ul>
+        </nav>
+      {/* </Reveal> */}
     </Container>
     </>
   );
