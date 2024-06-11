@@ -100,7 +100,28 @@ export const FormContainer = styled.form`
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
-export const ButtonForm = styled(Button)`
+export const ButtonForm = styled.button`
+  padding: 12px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 100px;
+
+  background-color: ${({ theme }) => theme.colors.primary.main};
+  color: #FFF;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 16px;
+
+  transition: transform 0.3s ease;
+  &:not([disabled]):hover {
+    transform: translateY(-5px);
+  }
+  &:not([disabled]):active {
+    transform: translateY(0);
+  }
+
   color: #FFF;
   max-width: 400px;
   width: 100%;
@@ -111,6 +132,7 @@ export const ButtonForm = styled(Button)`
   padding: 16px;
 
   margin-top: 16px;
+  
 
   &[disabled] {
     background: #ccc;

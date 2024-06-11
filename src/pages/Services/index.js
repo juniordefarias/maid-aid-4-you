@@ -106,7 +106,7 @@ export default function Services() {
           <rect width="185" height="84" transform="translate(293 232.918)" fill="#F1F1F1"/>
           </svg> */}
           <svg width="450" height="300" viewBox="0 0 450 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="450" height="300" fill="#CFCFCF"/>
+            <rect width="450" height="300" fill="#F8D3C9"/>
           </svg>
         </Section>
       </HomeContainer>

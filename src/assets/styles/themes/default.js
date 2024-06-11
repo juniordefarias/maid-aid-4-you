@@ -13,5 +13,9 @@ export default {
       dark: '#666666'
     },
     gold: '#D4AB8D'
+  },
+  toast: {
+    success: '#7abf66',
+    danger: '#ff6464'
   }
 };

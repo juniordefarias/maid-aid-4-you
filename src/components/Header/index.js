@@ -22,7 +22,7 @@ export default function Header() {
     
     !pageSelected ? setPage('home') : setPage(pageSelected);
 
-    console.log({pathname})
+    // console.log({pathname})
 
   }, [pathname]);
 

@@ -428,7 +428,7 @@ export default function Form({ serviceSelected }) {
       service: typeProperty === 'Commercial' ? typeProperty : residentialService,
     }
     
-    emailjs.send("service_chwcqnk", "template_ci3zktl", templateParams, "92THF5nm3464N9pdX")
+    /* emailjs.send("service_chwcqnk", "template_ci3zktl", templateParams, "92THF5nm3464N9pdX")
       .then((response) => {
         console.log("Email enviado", response.status, response.text);
 
@@ -438,7 +438,7 @@ export default function Form({ serviceSelected }) {
       }, (err) => {
         console.log("error:", err);
         setIsloading(false);
-      });
+      }); */
   }
 
   const [alertOpen, setAlertOpen] = useState(false);

@@ -14,6 +14,8 @@ import themes from '../../assets/styles/themes/default';
 // comment the line right bellow if we dont need two themes on our project
 /* import { ThemeContext } from '../../contexts/ThemeContext'; */
 
+import ToastContainer from '../Toast/ToastContainer';
+
 import Routes from '../../Router';
 
 import Header from './../Header';
@@ -26,6 +28,8 @@ export default function App() {
     <BrowserRouter>
         <ThemeProvider theme={themes}>
           <GlobalStyle />
+
+            <ToastContainer />
             <Header />
             <Routes />
             <Footer />

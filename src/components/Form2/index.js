@@ -21,6 +21,8 @@ import isEmailValid from '../../utils/isEmailValid';
 import isPhoneNumberValid from '../../utils/isPhoneNumberValid';
 import isZipCodeValid from '../../utils/isZipCodeValid';
 
+import toast from '../../utils/toast';
+
 export default function Form({ serviceSelected }) {
   const {
     /* Vamos pegar o state errors para usá-lo para fazer a validação do form  */
@@ -272,7 +274,6 @@ export default function Form({ serviceSelected }) {
           building size: ${formProperty.buildingSize},
           rooms: ${formProperty.rooms},
           bathrooms: ${formProperty.bathrooms},
-          pets: ${formProperty.pets},
           -
           service: ${residentialService},
           more informations: ${moreInformations},
@@ -322,7 +323,7 @@ export default function Form({ serviceSelected }) {
       service: typeProperty === 'Commercial' ? typeProperty : residentialService,
     }
     
-    emailjs.send("service_chwcqnk", "template_ci3zktl", templateParams, "92THF5nm3464N9pdX")
+    emailjs.send("", "", templateParams, "")
       .then((response) => {
         console.log("Email enviado", response.status, response.text);
 
@@ -330,7 +331,20 @@ export default function Form({ serviceSelected }) {
         setIsloading(false);
         // window.scrollTo(0, 0);
       }, (err) => {
-        console.log("error:", err);
+        /* console.log("error:", err, err.status);
+        console.dir(err) */
+        if (err.status === 408) {
+          toast({ type: 'danger', text: 'Sorry, the server took too long to respond. Please check your internet connection and try again.' });
+        } else if (err.status === 500) {
+          toast({ type: 'danger', text: 'Oops! There was a problem on the server. Our technical team has been notified and is working to fix this. Please try again later' });
+        } else if (err.status === 503) {
+          toast({ type: 'danger', text: 'Sorry, the service is temporarily unavailable. Please try again later while we resolve the issue.' });
+        } else if (err.status === 504) {
+          toast({ type: 'danger', text: 'Oops! It seems the connection to the server was interrupted. Please check your internet connection and try again.' });
+        } else {
+          toast({ type: 'danger', text: 'Oops! It seems something went wrong with the data you submitted. Please check and try again' });
+        }
+        
         setIsloading(false);
       });
   }
@@ -365,7 +379,7 @@ export default function Form({ serviceSelected }) {
         }
       
         <Reveal>
-          <FormGroup label="What's your property?" icon='email'>
+          <FormGroup label="What's your property?" icon='property'>
             <RadioContainer 
               options={properties}
               selectedOption={typeProperty}
@@ -377,7 +391,7 @@ export default function Form({ serviceSelected }) {
         {
           typeProperty === 'Residential' && (
             <Reveal>
-              <FormGroup label="Choose the service" icon='email'>
+              <FormGroup label="Choose the service" icon='tools'>
                 <RadioContainer 
                   options={residentialServices}
                   selectedOption={residentialService}
@@ -403,55 +417,59 @@ export default function Form({ serviceSelected }) {
         }
 
         <Reveal delay='0.3'>
-          <RowContainer>
-            <FormGroup label='Building size' icon='ruler'>
-              <input 
-                type='tel' 
-                // placeholder='Size in sqft' 
-                name='buildingSize'
-                value={formProperty.buildingSize}
-                onChange={handleFormPropertyChange}
-              />
-            </FormGroup>
-
-            <FormGroup label='Rooms' icon='room'>
-              <input 
-                type='tel' 
-                // placeholder='Quantity of rooms'
-                name='rooms'
-                value={formProperty.rooms}
-                onChange={handleFormPropertyChange}
-              />
-            </FormGroup>
-
-            {
-              residentialService !== 'Carpet Cleaning' && (
-                <FormGroup label='Bathrooms' icon='bathroom'>
+          {
+            typeProperty !== 'Commercial' && (
+              <RowContainer>
+                <FormGroup label='Building size' icon='ruler'>
                   <input 
                     type='tel' 
-                    // placeholder='Quantity of bathrooms'
-                    name='bathrooms'
-                    value={formProperty.bathrooms}
+                    // placeholder='Size in sqft' 
+                    name='buildingSize'
+                    value={formProperty.buildingSize}
                     onChange={handleFormPropertyChange}
                   />
                 </FormGroup>
-              )
-            }
 
-            {
-              !['Carpet Cleaning', 'Vacation Rental', 'Handyman'].includes(residentialService) && (
-                <FormGroup label='Pets' icon='email'>
+                <FormGroup label='Rooms' icon='room'>
                   <input 
                     type='tel' 
-                    // placeholder='How many pets you have?'
-                    name='pets'
-                    value={formProperty.pets}
-                    onChange={handleFormPropertyChange} 
+                    // placeholder='Quantity of rooms'
+                    name='rooms'
+                    value={formProperty.rooms}
+                    onChange={handleFormPropertyChange}
                   />
                 </FormGroup>
-              )
-            }
-          </RowContainer>
+
+                {
+                  residentialService !== 'Carpet Cleaning' && (
+                    <FormGroup label='Bathrooms' icon='bathroom'>
+                      <input 
+                        type='tel' 
+                        // placeholder='Quantity of bathrooms'
+                        name='bathrooms'
+                        value={formProperty.bathrooms}
+                        onChange={handleFormPropertyChange}
+                      />
+                    </FormGroup>
+                  )
+                }
+
+                {
+                  !['Move In/Out', 'Vacation Rental'].includes(residentialService) && (
+                    <FormGroup label='Pets' icon='email'>
+                      <input 
+                        type='tel' 
+                        // placeholder='How many pets you have?'
+                        name='pets'
+                        value={formProperty.pets}
+                        onChange={handleFormPropertyChange} 
+                      />
+                    </FormGroup>
+                  )
+                }
+              </RowContainer>
+            )
+          }
         </Reveal>
 
         <RowContainer $flex={true}>
