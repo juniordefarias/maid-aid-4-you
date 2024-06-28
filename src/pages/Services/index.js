@@ -41,8 +41,6 @@ export default function Services() {
       behavior: 'smooth',
     });
   }
-
-  console.log({serviceSelected})
   
   return (
     <Container>

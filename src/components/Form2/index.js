@@ -420,7 +420,7 @@ export default function Form({ serviceSelected }) {
           {
             typeProperty !== 'Commercial' && (
               <RowContainer>
-                <FormGroup label='Building size' icon='ruler'>
+                <FormGroup /* label='Building size (sqft)' */ label='Sqft' icon='ruler'>
                   <input 
                     type='tel' 
                     // placeholder='Size in sqft' 
@@ -517,10 +517,10 @@ export default function Form({ serviceSelected }) {
 
           {
             typeProperty === 'Commercial' && (
-              <FormGroup label='Building size' icon='ruler'>
+              <FormGroup /* label='Building size (sqft)' */ label='Sqft' icon='ruler'>
                 <input 
                   type='text' 
-                  placeholder='Size in sqft' 
+                  /* placeholder='Size in sqft' */ 
                   name='buildingSize'
                   value={formProperty.buildingSize}
                   onChange={handleFormPropertyChange}
